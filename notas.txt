@@ -1,0 +1,35 @@
+O que é necessário:
+
+    classe para avioes
+        ID do aviao
+        Cria um aviao, em que pode ser atribuido varios voos
+        Cada aviao tem o nem numero de lugares: Economico (2 filas com 3 lugares cada, 3 filas com 3 lugares cada, ambos estes têm 69 lugar em uma so fila)
+                                                Business class (2 filas com 2 lugares cada, 3 filas com 2 lugares cada, o primeiro com 20 lugares, o segundo com 48 lugares)
+                                                    Total (O primeiro aviao com 158 lugares, e o segundo com 231 lugares)
+
+    Classe para voos
+        ID do voo
+        Origem e destino do voo
+        Preço de cada tipo de bilhete
+        Cada voo tem o mesmo numero de lugares do aviao (provavelmente erdar a classe voo da classe aviao)
+        Tem armazenado varias listas: -Matriz lugares livres:   .Lugares economicos a janela (fila A e F, ou, fila A e I)
+                                                                .lugares economicos no meio (fila B e E, ou, fila B, E e H)
+                                                                .lugares economicos no corredor (fila C e D, ou, fila C, D, F e G)
+                                                                .lugares buiness a janela (fila A e D, ou, fila A e F)
+                                                                .lugares business no corredor (fila B e C, ou, fila B, C, D e E)
+
+                                      -Matriz lugares ocupados: .Lugares economicos a janela (fila A e F, ou, fila A e I)
+                                                                .lugares economicos no meio (fila B e E, ou, fila B, E e H)
+                                                                .lugares economicos no corredor (fila C e D, ou, fila C, D, F e G)
+                                                                .lugares buiness a janela (fila A e D, ou, fila A e F)
+                                                                .lugares business no corredor (fila B e C, ou, fila B, C, D e E)
+    Classe para passageiros
+        ID do passageiro
+        Pais de origem do passageiro
+        ID do voo reservado
+            numero do lugar
+            preco do lugar reservado
+            Confirmacao de compra (bool para saber se ja foi comprado, assim sendo o lugar ja tem que estar na lista dos lugares ocupados
+            Método de pagamento
+
+    A pensar se e necessario fazer tela de login! (imagina que queres reservar um lugar para uma outra pessoa)
