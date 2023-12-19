@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Interface">
+  <grid id="27dc6" binding="BackGround" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="9" y="13" width="2" height="435"/>
+    </constraints>
+    <properties>
+      <alignmentX value="0.0"/>
+      <alignmentY value="0.0"/>
+      <background color="-16777216"/>
+    </properties>
+    <border type="line"/>
+    <children/>
+  </grid>
+</form>
