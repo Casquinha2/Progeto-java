@@ -2,6 +2,8 @@ import java.time.LocalDateTime;
 
 public class Code {
     public Code() {
+        Texto TextoIncio = new Texto();
+        TextoIncio.MensagemEntrada();
         Aviao AviaoLMAO = new Aviao();
         AviaoLMAO.setNumeroDeLugares(150);
         AviaoLMAO.setModelo("Bruh Moment");
