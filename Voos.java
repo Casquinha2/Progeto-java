@@ -1,20 +1,22 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Voos {
     private String paisSaida;
     private String paisChegada;
-    private String horario;
+    private LocalDateTime HorarioDePartida;
+    private LocalDateTime HorarioDeChegada;
     private double preco;
-    private int LugaresReservados;
+    private int lugaresReservados;
     private int lugaresLivres;
 
-
-
     public Voos() {
-        // inicializa os valores padrão ou define-os conforme necessário
         this.paisSaida = "País de Saída Padrão";
         this.paisChegada = "País de Chegada Padrão";
-        this.horario = "Horário Padrão";
+        this.HorarioDePartida = LocalDateTime.now();
+        this.HorarioDeChegada = LocalDateTime.now();
         this.preco = 0.0;
-        this.LugaresReservados = 0;
+        this.lugaresReservados = 0;
         this.lugaresLivres = 0;
     }
 
@@ -34,14 +36,20 @@ public class Voos {
         this.paisChegada = paisChegada;
     }
 
-    public String getHorario() {
-        return this.horario;
+    public LocalDateTime getHorarioDePartida() {
+        return this.HorarioDePartida;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setHorarioDePartida(LocalDateTime HorarioDePartida) {
+        this.HorarioDePartida = HorarioDePartida;
+    }
+    public LocalDateTime getHorarioDeChegada() {
+        return this.HorarioDeChegada;
     }
 
+    public void setHorarioDeChegada(LocalDateTime HorarioDeChegada) {
+        this.HorarioDeChegada = HorarioDeChegada;
+    }
     public double getPreco() {
         return this.preco;
     }
@@ -51,11 +59,11 @@ public class Voos {
     }
 
     public int getLugaresReservados() {
-        return this.LugaresReservados;
+        return this.lugaresReservados;
     }
 
-    public void setLugaresReservados(int LugaresReservados) {
-        this.LugaresReservados = LugaresReservados;
+    public void setLugaresReservados(int lugaresReservados) {
+        this.lugaresReservados = lugaresReservados;
     }
 
     public int getLugaresLivres() {
@@ -66,12 +74,14 @@ public class Voos {
         this.lugaresLivres = lugaresLivres;
     }
 
-    public void InformacoesDoVoo() {
+    public void informacoesDoVoo() {
         System.out.println("País de Saída: " + this.paisSaida);
         System.out.println("País de Chegada: " + this.paisChegada);
-        System.out.println("Horário: " + this.horario);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");;
+        System.out.println("Horário de Partida: " + this.HorarioDePartida.format(dateTimeFormatter));
+        System.out.println("Horário de Chegada: " + this.HorarioDeChegada.format(dateTimeFormatter));
         System.out.println("Preço: " + this.preco + "€");
-        System.out.println("Lugares Reservados: " + this.LugaresReservados);
+        System.out.println("Lugares Reservados: " + this.lugaresReservados);
         System.out.println("Lugares Livres: " + this.lugaresLivres);
     }
 }
