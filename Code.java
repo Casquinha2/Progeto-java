@@ -26,5 +26,11 @@ public class Code {
 
         AviaoLMAO.InformacoesDoAviao();
         VooSeiLa.informacoesDoVoo();
+
+        Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
+        Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
+        System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
+
+
     }
 }
