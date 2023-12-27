@@ -1,6 +1,20 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Code {
-    public Code() {
+    public Code() throws IOException {
+        List<Passageiros> listapessoas = new ArrayList<>();
+
+        Json json = new Json();
+        listapessoas = (List<Passageiros>) json.ler();
+
+
         Texto TextoIncio = new Texto();
         TextoIncio.MensagemEntrada();
         Aviao AviaoLMAO = new Aviao();
@@ -26,10 +40,25 @@ public class Code {
         AviaoLMAO.informacoesDoAviao();
         VooSeiLa.informacoesDoVoo();
 
+
+
         Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
         Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
         System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
+
+        //Salvar os passageiros em um json
+        listapessoas.add(pessoa1);
+        listapessoas.add(pessoa2);
+        json.salvar(listapessoas);
+
+
+
         AviaoLMAO.informacoesDosAssentos();
+
+
+
+
+
 
     }
 }
