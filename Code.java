@@ -1,11 +1,10 @@
 import java.time.LocalDateTime;
-
 public class Code {
     public Code() {
         Texto TextoIncio = new Texto();
         TextoIncio.MensagemEntrada();
         Aviao AviaoLMAO = new Aviao();
-        AviaoLMAO.setNumeroDeLugares(150);
+        AviaoLMAO.setNumeroDeLugares(120);
         AviaoLMAO.setModelo("Bruh Moment");
 
         Voos VooSeiLa = new Voos();
@@ -24,13 +23,13 @@ public class Code {
         VooSeiLa.setLugaresReservados(5);
         VooSeiLa.setLugaresLivres(AviaoLMAO.getNumeroDeLugares() - VooSeiLa.getLugaresReservados());
 
-        AviaoLMAO.InformacoesDoAviao();
+        AviaoLMAO.informacoesDoAviao();
         VooSeiLa.informacoesDoVoo();
 
         Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
         Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
         System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
-
+        AviaoLMAO.informacoesDosAssentos();
 
     }
 }
