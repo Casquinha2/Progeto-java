@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Code {
     public Code() throws IOException {
+
         List<Passageiros> listapessoas = new ArrayList<>();
 
         Json json = new Json();
@@ -42,6 +43,11 @@ public class Code {
 
 
 
+
+        AviaoLMAO.informacoesDosAssentos();
+
+
+
         Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
         Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
         System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
@@ -50,14 +56,6 @@ public class Code {
         listapessoas.add(pessoa1);
         listapessoas.add(pessoa2);
         json.salvar(listapessoas);
-
-
-
-        AviaoLMAO.informacoesDosAssentos();
-
-
-
-
 
 
     }
