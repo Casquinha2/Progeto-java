@@ -5,7 +5,7 @@ O que é necessário:
         Cria um aviao, em que pode ser atribuido varios voos
         Cada aviao tem o nem numero de lugares: Economico (2 filas com 3 lugares cada, 3 filas com 3 lugares cada, ambos estes têm 69 lugar em uma so fila)
                                                 Business class (2 filas com 2 lugares cada, 3 filas com 2 lugares cada, o primeiro com 20 lugares, o segundo com 48 lugares)
-                                                    Total (O primeiro aviao com 158 lugares, e o segundo com 231 lugares)
+                                                    Total (O primeiro aviao com 126 lugares, e o segundo com 231 lugares)
     Classe para voos
         ID do voo
         Origem e destino do voo

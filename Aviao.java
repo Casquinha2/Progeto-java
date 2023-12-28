@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Aviao {
     private int numeroDeLugares;
@@ -7,11 +8,13 @@ public class Aviao {
 
     private List<Assento> assentos; // Corrigindo o tipo de lista para Assento
 
-    public Aviao() {
-        this.numeroDeLugares = 108;
-        this.modelo = "Modelo";
+    public Aviao(int lugares, String modelo) {
+        this.numeroDeLugares = lugares;
+        this.modelo = modelo;
         this.assentos = gerarAssentos(); // Inicializando os assentos
     }
+
+
 
     public int getNumeroDeLugares() {
         return this.numeroDeLugares;
@@ -36,29 +39,38 @@ public class Aviao {
 
     private List<Assento> gerarAssentos() {
         List<Assento> assentos = new ArrayList<>();
+        if(Objects.equals(this.modelo, "Boeing 737")) {
+            for (int fila = 1; fila <= 3; fila++) {
+                String classe = "Business";
 
-        for (int fila = 1; fila <= 20; fila++) {
-            String classe;
-            if (fila >= 1 && fila <= 6) {
-                classe = "Business";
-            } else {
-                classe = "Econômico";
-            }
-
-            for (char coluna = 'A'; coluna <= 'F'; coluna++) {
-                String Local;
-                if (coluna == 'A' || coluna == 'F') {
-                    Local = "Janela";
-                } else if (coluna == 'C' || coluna == 'D') {
-                    Local = "Corredor";
-                } else {
-                    Local = "Meio";
+                for (char coluna = 'A'; coluna <= 'D'; coluna++) {
+                    String local;
+                    if (coluna == 'A' || coluna == 'D') {
+                        local = "Janela";
+                    } else{
+                        local = "Corredor";
+                    }
+                    Assento assento = new Assento("" + fila + coluna, fila, coluna, local, classe);
+                    assentos.add(assento);
                 }
-                Assento assento = new Assento("" + fila + coluna, fila, coluna, Local, classe);
-                assentos.add(assento);
+            }
+            for (int fila = 4; fila <=22 ; fila++) {
+                String classe = "Económico";
+
+                for (char coluna = 'A'; coluna <= 'F'; coluna++) {
+                    String Local;
+                    if (coluna == 'A' || coluna == 'F') {
+                        Local = "Janela";
+                    } else if (coluna == 'C' || coluna == 'D') {
+                        Local = "Corredor";
+                    } else {
+                        Local = "Meio";
+                    }
+                    Assento assento = new Assento("" + fila + coluna, fila, coluna, Local, classe);
+                    assentos.add(assento);
+                }
             }
         }
-
         return assentos;
     }
 

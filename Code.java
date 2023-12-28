@@ -10,15 +10,16 @@ import java.util.List;
 public class Code {
     public Code() throws IOException {
 
+
         Json json = new Json();
         List<Passageiros> listapessoas = (List<Passageiros>) json.ler();
 
 
         Texto TextoIncio = new Texto();
         TextoIncio.MensagemEntrada(listapessoas);
-        Aviao AviaoLMAO = new Aviao();
-        AviaoLMAO.setNumeroDeLugares(120);
-        AviaoLMAO.setModelo("Bruh Moment");
+        Aviao aviaoboieng737 = new Aviao(126,"Boeing 737");
+        aviaoboieng737.setNumeroDeLugares(120);
+        aviaoboieng737.setModelo("Bruh Moment");
 
         Voos VooSeiLa = new Voos();
         VooSeiLa.setPaisSaida("Tu casa");
@@ -34,22 +35,19 @@ public class Code {
 
         VooSeiLa.setPreco(10000);
         VooSeiLa.setLugaresReservados(5);
-        VooSeiLa.setLugaresLivres(AviaoLMAO.getNumeroDeLugares() - VooSeiLa.getLugaresReservados());
-
-        AviaoLMAO.informacoesDoAviao();
+        VooSeiLa.setLugaresLivres(aviaoboieng737.getNumeroDeLugares() - VooSeiLa.getLugaresReservados());
+        aviaoboieng737.informacoesDoAviao();
         VooSeiLa.informacoesDoVoo();
 
 
 
 
-        AviaoLMAO.informacoesDosAssentos();
+        aviaoboieng737.informacoesDosAssentos();
 
 
 
         Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
         Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
-        System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
-
         //Salvar os passageiros em um json
         //listapessoas.add(pessoa1);
         //listapessoas.add(pessoa2);
