@@ -31,12 +31,16 @@ public class Json {
             reader.close();
             File file = new File("Passageiros.json");
             file.delete();
+            wait(5000);
             return listapessoas;
 
         } catch (FileNotFoundException e) {
             List<Passageiros> listapessoas = new ArrayList<>();
+
             return listapessoas;
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

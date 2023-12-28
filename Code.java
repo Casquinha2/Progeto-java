@@ -10,10 +10,8 @@ import java.util.List;
 public class Code {
     public Code() throws IOException {
 
-        List<Passageiros> listapessoas = new ArrayList<>();
-
         Json json = new Json();
-        listapessoas = (List<Passageiros>) json.ler();
+        List<Passageiros> listapessoas = (List<Passageiros>) json.ler();
 
 
         Texto TextoIncio = new Texto();
