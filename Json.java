@@ -14,7 +14,8 @@ import java.lang.reflect.Type;
 public class Json {
     Gson gson = new Gson();
     public void salvar(List<Passageiros> passageiros) throws IOException {
-        try(FileWriter writer = new FileWriter("Passageiros.json")){
+        try{
+            FileWriter writer = new FileWriter("Passageiros.json");
             String ficheiro = gson.toJson(passageiros);
             writer.write(ficheiro);
             writer.close();
@@ -31,7 +32,6 @@ public class Json {
             reader.close();
             File file = new File("Passageiros.json");
             file.delete();
-            wait(5000);
             return listapessoas;
 
         } catch (FileNotFoundException e) {
@@ -39,8 +39,6 @@ public class Json {
 
             return listapessoas;
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -15,7 +15,7 @@ public class Code {
 
 
         Texto TextoIncio = new Texto();
-        TextoIncio.MensagemEntrada();
+        TextoIncio.MensagemEntrada(listapessoas);
         Aviao AviaoLMAO = new Aviao();
         AviaoLMAO.setNumeroDeLugares(120);
         AviaoLMAO.setModelo("Bruh Moment");
@@ -51,8 +51,8 @@ public class Code {
         System.out.println(pessoa1.getId()+"\n"+ pessoa2.getId());
 
         //Salvar os passageiros em um json
-        listapessoas.add(pessoa1);
-        listapessoas.add(pessoa2);
+        //listapessoas.add(pessoa1);
+        //listapessoas.add(pessoa2);
         json.salvar(listapessoas);
 
 
