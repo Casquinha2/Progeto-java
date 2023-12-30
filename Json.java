@@ -71,9 +71,8 @@ public class Json {
             return listavoos;
 
         } catch (FileNotFoundException e) {
-            List<Voos> listavoos = Voos.criarListaDeVoosAleatorios();
 
-            return listavoos;
+            return Voos.criarListaDeVoosAleatorios();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

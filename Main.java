@@ -5,3 +5,5 @@ public class Main {
         new Code();
     }
 }
+
+// eRRO A ARMAZENAR A LISTA DOS VOOS, TEM HAVER COM OS HORARIOS E O LOCAL TIME
