@@ -12,23 +12,28 @@ import java.lang.reflect.Type;
 
 
 public class Json {
-    Gson gson = new Gson();
-    public void salvar(List<Passageiros> passageiros) throws IOException {
-        try{
+    private final Gson gpson = new Gson();
+
+    public void salvar_passageiros(List<Passageiros> passageiros) throws IOException {
+        try {
             FileWriter writer = new FileWriter("Passageiros.json");
-            String ficheiro = gson.toJson(passageiros);
+            String ficheiro = gpson.toJson(passageiros);
             writer.write(ficheiro);
             writer.close();
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    };
-    public Object ler() throws FileNotFoundException {
+    }
+
+    ;
+
+    public Object ler_passageiros() throws FileNotFoundException {
         try {
             List<Passageiros> listapessoas = new ArrayList<>();
             FileReader reader = new FileReader("Passageiros.json");
-            Type tipo = new TypeToken<List<Passageiros>>(){}.getType();
-            listapessoas = gson.fromJson(reader, tipo);
+            Type tipo = new TypeToken<List<Passageiros>>() {
+            }.getType();
+            listapessoas = gpson.fromJson(reader, tipo);
             reader.close();
             File file = new File("Passageiros.json");
             file.delete();
@@ -38,6 +43,16 @@ public class Json {
             List<Passageiros> listapessoas = new ArrayList<>();
 
             return listapessoas;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void salvar_voos(List<Voos> voos) throws IOException {
+        try {
+            FileWriter writer = new FileWriter("Voos.json");
+            String ficheiro = gpson.toJson(voos);
+            writer.write(ficheiro);
+            writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

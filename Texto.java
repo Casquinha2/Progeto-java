@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Texto {
     public void MensagemEntrada(List<Passageiros> listapessoas) throws IOException {
         System.out.println("Bem-vindo à WingWays, a sua passagem para aventuras pelo céu!");
@@ -12,7 +13,7 @@ public class Texto {
         exibirMenu(listapessoas);
     }
 
-   private void exibirMenu(List<Passageiros> listapessoas) throws IOException {
+    private void exibirMenu(List<Passageiros> listapessoas) throws IOException {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -40,7 +41,7 @@ public class Texto {
                     break;
                 case 4:
                     System.out.println("Obrigado por voar conosco! Até a próxima.\n");
-                    json.salvar(listapessoas);
+                    json.salvar_passageiros(listapessoas);
                     System.exit(0);
                     break;
                 default:
@@ -49,5 +50,4 @@ public class Texto {
             }
         } while (opcao > 4);
     }
-
-} //dps mudem o nome se quizerem
+}

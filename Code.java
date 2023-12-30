@@ -1,18 +1,13 @@
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Code {
     public Code() throws IOException {
 
-
+        Voos.exibirVoos(Voos.criarListaDeVoosAleatorios());
         Json json = new Json();
-        List<Passageiros> listapessoas = (List<Passageiros>) json.ler();
+        List<Passageiros> listapessoas = (List<Passageiros>) json.ler_passageiros();
 
 
         Texto TextoIncio = new Texto();
@@ -49,9 +44,9 @@ public class Code {
         Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
         Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
         //Salvar os passageiros em um json
-        //listapessoas.add(pessoa1);
-        //listapessoas.add(pessoa2);
-        json.salvar(listapessoas);
+        listapessoas.add(pessoa1);
+        listapessoas.add(pessoa2);
+        json.salvar_passageiros(listapessoas);
 
 
     }
