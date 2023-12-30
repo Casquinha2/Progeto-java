@@ -25,6 +25,19 @@ public class Voos {
         this.lugaresLivres = 0;
     }
 
+    @Override
+    public String toString() {
+        return "Voos{" +
+                "paisSaida='" + paisSaida + '\'' +
+                ", paisChegada='" + paisChegada + '\'' +
+                ", HorarioDePartida=" + HorarioDePartida +
+                ", HorarioDeChegada=" + HorarioDeChegada +
+                ", preco=" + preco +
+                ", lugaresReservados=" + lugaresReservados +
+                ", lugaresLivres=" + lugaresLivres +
+                '}';
+    }
+
     private static final List<String> paises = List.of(
             "Portugal","Brasil", "EUA", "Canadá", "Reino Unido", "Alemanha", "França", "Japão", "Austrália", "China", "Índia"
     );

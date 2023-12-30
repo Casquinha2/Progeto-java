@@ -5,13 +5,18 @@ import java.util.List;
 public class Code {
     public Code() throws IOException {
 
-        Voos.exibirVoos(Voos.criarListaDeVoosAleatorios());
+
         Json json = new Json();
         List<Passageiros> listapessoas = (List<Passageiros>) json.ler_passageiros();
+        List<Voos> listavoos = (List<Voos>) json.ler_voos();
 
+        for (Voos voo : listavoos) {
+            voo.informacoesDoVoo();
+            System.out.println(); // Adicionar linha em branco entre informações dos voos
+        }
 
         Texto TextoIncio = new Texto();
-        TextoIncio.MensagemEntrada(listapessoas);
+        TextoIncio.MensagemEntrada(listapessoas, listavoos);
         Aviao aviaoboieng737 = new Aviao(126,"Boeing 737");
         aviaoboieng737.setNumeroDeLugares(120);
         aviaoboieng737.setModelo("Bruh Moment");

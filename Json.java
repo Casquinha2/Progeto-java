@@ -12,12 +12,12 @@ import java.lang.reflect.Type;
 
 
 public class Json {
-    private final Gson gpson = new Gson();
+    private Gson gson = new Gson();
 
     public void salvar_passageiros(List<Passageiros> passageiros) throws IOException {
         try {
             FileWriter writer = new FileWriter("Passageiros.json");
-            String ficheiro = gpson.toJson(passageiros);
+            String ficheiro = gson.toJson(passageiros);
             writer.write(ficheiro);
             writer.close();
         } catch (IOException e) {
@@ -33,7 +33,7 @@ public class Json {
             FileReader reader = new FileReader("Passageiros.json");
             Type tipo = new TypeToken<List<Passageiros>>() {
             }.getType();
-            listapessoas = gpson.fromJson(reader, tipo);
+            listapessoas = gson.fromJson(reader, tipo);
             reader.close();
             File file = new File("Passageiros.json");
             file.delete();
@@ -50,9 +50,30 @@ public class Json {
     public void salvar_voos(List<Voos> voos) throws IOException {
         try {
             FileWriter writer = new FileWriter("Voos.json");
-            String ficheiro = gpson.toJson(voos);
+            String ficheiro = gson.toJson(voos);
             writer.write(ficheiro);
             writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Object ler_voos() throws FileNotFoundException {
+        try {
+            List<Voos> listavoos = new ArrayList<>();
+            FileReader reader = new FileReader("Voos.json");
+            Type tipo = new TypeToken<List<Voos>>() {
+            }.getType();
+            listavoos = gson.fromJson(reader, tipo);
+            reader.close();
+            File file = new File("Voos.json");
+            file.delete();
+            return listavoos;
+
+        } catch (FileNotFoundException e) {
+            List<Voos> listavoos = Voos.criarListaDeVoosAleatorios();
+
+            return listavoos;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
