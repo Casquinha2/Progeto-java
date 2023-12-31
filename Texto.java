@@ -31,11 +31,35 @@ public class Texto {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Aqui pode verificar os voos atualmente em vigor\n");
+                    System.out.println("Aqui pode verificar os voos atualmente em vigor");
                     Voos.exibirVoos(listavoos);
                     break;
                 case 2:
-                    System.out.println("Escolha o voo onde deseja reservar o seu lugar\n");
+                    System.out.println("Registe-se num voo!");
+                    System.out.print("Nome: ");
+                    String nome = scanner.nextLine();
+
+                    System.out.print("País: ");
+                    String pais = scanner.nextLine();
+
+
+                    System.out.print("Possui bagagem extra? (sim/não): ");
+                    boolean bagagemExtra = scanner.nextLine().equalsIgnoreCase("sim");
+
+                    System.out.print("Possui usufruir de um seguro? (sim/não): ");
+                    boolean seguro = scanner.nextLine().equalsIgnoreCase("sim");
+
+                    System.out.print("Check-in automático ativado? (sim/não): ");
+                    boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
+
+                    Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
+                    listapessoas.add(novoPassageiro);
+                    System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
+                    Voos vooSelecionado = listavoos.get(0); // Apenas para exemplo, seleção do primeiro voo
+
+                    double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
+                    System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
+                    System.out.println("Preço do voo: " + precoFinal + "€"); // Mostra o preço final ao usuário
                     break;
                 case 3:
                     System.out.println("Esta funcionalidade atualmente não se encontra \n");

@@ -46,11 +46,11 @@ public class Code {
 
 
 
-        Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
-        Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
+        //Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
+        //Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
         //Salvar os passageiros em um json
-        listapessoas.add(pessoa1);
-        listapessoas.add(pessoa2);
+        //listapessoas.add(pessoa1);
+        //listapessoas.add(pessoa2);
         json.salvar_passageiros(listapessoas);
 
 
