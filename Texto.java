@@ -46,7 +46,7 @@ public class Texto {
                     System.out.print("Possui bagagem extra? (sim/não): ");
                     boolean bagagemExtra = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    System.out.print("Possui usufruir de um seguro? (sim/não): ");
+                    System.out.print("Quer usufruir de um seguro? (sim/não): ");
                     boolean seguro = scanner.nextLine().equalsIgnoreCase("sim");
 
                     System.out.print("Check-in automático ativado? (sim/não): ");
@@ -54,7 +54,6 @@ public class Texto {
 
                     Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
                     listapessoas.add(novoPassageiro);
-                    System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
                     Voos vooSelecionado = listavoos.get(0); // Apenas para exemplo, seleção do primeiro voo
 
                     double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
