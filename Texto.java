@@ -73,6 +73,6 @@ public class Texto {
                     System.out.println("Opção inválida. Escolha uma opção válida.\n");
                     break;
             }
-        } while (opcao > 4);
+        } while (opcao != 4);
     }
 }
