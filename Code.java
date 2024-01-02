@@ -25,6 +25,10 @@ public class Code {
         VooSeiLa.setPaisSaida("Tu casa");
         VooSeiLa.setPaisChegada("MI CASA");
 
+        listavoos.add(VooSeiLa);
+
+        System.out.println(VooSeiLa.toString());
+
         // Definindo horário de partida para 1 de janeiro de 2024, às 9h
         LocalDateTime horarioPartida = LocalDateTime.of(2024, 1, 1, 9, 0);
         VooSeiLa.setHorarioDePartida(horarioPartida);
@@ -46,12 +50,14 @@ public class Code {
 
 
 
-        //Passageiros pessoa1 = new Passageiros("Tiago","Portugal");
-        //Passageiros pessoa2 = new Passageiros("Hugo","Espanha");
+        Passageiros pessoa1 = new Passageiros("Tiago","Portugal", false,false,false);
+        Passageiros pessoa2 = new Passageiros("Hugo","Espanha",false,false,false);
         //Salvar os passageiros em um json
-        //listapessoas.add(pessoa1);
-        //listapessoas.add(pessoa2);
+        listapessoas.add(pessoa1);
+        listapessoas.add(pessoa2);
         json.salvar_passageiros(listapessoas);
+
+        json.salvar_voos(listavoos);
 
 
     }
