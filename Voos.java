@@ -118,14 +118,14 @@ public class Voos {
         Random random = new Random();
 
         for (int i = 0; i < 4; i++) {
-            Voos voo = new Voos();
-            voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
-            voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
-            voo.setPreco(50*i+100);
-            voo.setLugaresReservados(random.nextInt(30));
-            voo.setLugaresLivres(126-voo.getLugaresReservados());
+                Voos voo = new Voos();
+                voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
+                voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(24) + 1, ChronoUnit.HOURS));
+                voo.setPreco(50*i+100);
+                voo.setLugaresReservados(random.nextInt(30));
+                voo.setLugaresLivres(126-voo.getLugaresReservados());
 
-            listaVoos.add(voo);
+                listaVoos.add(voo);
         }
 
         return listaVoos;
