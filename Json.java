@@ -73,7 +73,9 @@ public class Json {
         try {
             List<Voos> listavoos = new ArrayList<>();
             FileReader reader = new FileReader("Voos.json");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                    .create();
             Type tipo = new TypeToken<List<Voos>>(){}.getType();
             listavoos = gson.fromJson(reader, tipo);
             reader.close();
