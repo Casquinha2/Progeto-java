@@ -1,1 +1,1 @@
-[{"nome":"Tiago","id":0,"lugarreservado":0,"pais":"Portugal","seguro":false,"bagagemExtra":false,"checkInAutomatico":false},{"nome":"Hugo","id":1,"lugarreservado":0,"pais":"Espanha","seguro":false,"bagagemExtra":false,"checkInAutomatico":false}]
+[{"nome":"hugo","id":0,"lugarreservado":0,"pais":"pois","seguro":false,"bagagemExtra":true,"checkInAutomatico":true}]
