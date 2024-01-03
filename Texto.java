@@ -79,14 +79,14 @@ public class Texto {
                     int numeroVooEscolhido = scanner.nextInt();
 
                     // Obter o voo selecionado pelo usuário
-                    Voos vooSelecionado = voosDisponiveis.get(numeroVooEscolhido - 1); // Ajuste do índice
+                    Voos vooSelecionado = voosDisponiveis.get(numeroVooEscolhido - 1);
 
                     listapessoas.add(novoPassageiro);
-                    vooSelecionado = listavoos.get(0);
 
+                    // Utilize o voo selecionado, não o primeiro voo da lista original
                     double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
                     System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
-                    System.out.println("Preço do voo: " + precoFinal + "€"); // Mostra o preço final ao usuário
+                    System.out.println("Preço do voo: " + precoFinal + "€");
                     break;
                 case 3:
                     System.out.println("Esta funcionalidade atualmente não se encontra \n");
