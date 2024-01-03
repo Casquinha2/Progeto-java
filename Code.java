@@ -58,7 +58,13 @@ public class Code {
         json.salvar_passageiros(listapessoas);
 
         json.salvar_voos(listavoos);
+        List<Voos> listaVoos = Voos.criarListaDeVoosAleatorios();
+        for (int i = 0; i < listaVoos.size(); i++) {
+            Voos voo = listaVoos.get(i);
+            voo.setNumeroVoo(i + 1); // Atribui o número de voo (começando em 1)
+        }
 
 
     }
+
 }

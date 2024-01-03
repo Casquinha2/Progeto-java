@@ -6,15 +6,13 @@ public class Aviao {
     private int numeroDeLugares;
     private String modelo;
 
-    private List<Assento> assentos; // Corrigindo o tipo de lista para Assento
+    private List<Assento> assentos;
 
     public Aviao(int lugares, String modelo) {
         this.numeroDeLugares = lugares;
         this.modelo = modelo;
         this.assentos = gerarAssentos(); // Inicializando os assentos
     }
-
-
 
     public int getNumeroDeLugares() {
         return this.numeroDeLugares;
@@ -37,9 +35,19 @@ public class Aviao {
         System.out.println("Número de lugares: " + this.numeroDeLugares);
     }
 
+    public List<Assento> getAssentosDisponiveis() {
+        List<Assento> assentosDisponiveis = new ArrayList<>();
+        for (Assento assento : this.assentos) {
+            if (!assento.isReservado()) {
+                assentosDisponiveis.add(assento);
+            }
+        }
+        return assentosDisponiveis;
+    }
+
     private List<Assento> gerarAssentos() {
         List<Assento> assentos = new ArrayList<>();
-        if(Objects.equals(this.modelo, "Boeing 737")) {
+        if (Objects.equals(this.modelo, "Boeing 737")) {
             for (int fila = 1; fila <= 3; fila++) {
                 String classe = "Business";
 
@@ -47,27 +55,29 @@ public class Aviao {
                     String local;
                     if (coluna == 'A' || coluna == 'D') {
                         local = "Janela";
-                    } else{
+                    } else {
                         local = "Corredor";
                     }
-                    Assento assento = new Assento("" + fila + coluna, fila, coluna, local, classe);
-                    assentos.add(assento);
+
+
+
                 }
             }
-            for (int fila = 4; fila <=22 ; fila++) {
+            for (int fila = 4; fila <= 22; fila++) {
                 String classe = "Económico";
 
                 for (char coluna = 'A'; coluna <= 'F'; coluna++) {
-                    String Local;
+                    String local;
                     if (coluna == 'A' || coluna == 'F') {
-                        Local = "Janela";
+                        local = "Janela";
                     } else if (coluna == 'C' || coluna == 'D') {
-                        Local = "Corredor";
+                        local = "Corredor";
                     } else {
-                        Local = "Meio";
+                        local = "Meio";
                     }
-                    Assento assento = new Assento("" + fila + coluna, fila, coluna, Local, classe);
-                    assentos.add(assento);
+
+
+
                 }
             }
         }
