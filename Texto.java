@@ -19,88 +19,91 @@ public class Texto {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
-        do {
-            System.out.println("\nEscolha uma opção:");
-            System.out.println("1. Verificar Voos");
-            System.out.println("2. Reservar");
-            System.out.println("3. Ajuda");
-            System.out.println("4. Sair");
+        while (true) {
+            {
+                System.out.println("\nEscolha uma opção:");
+                System.out.println("1. Verificar Voos");
+                System.out.println("2. Reservar");
+                System.out.println("3. Ajuda");
+                System.out.println("4. Sair");
 
-            System.out.print("Opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+                System.out.print("Opção: ");
+                opcao = scanner.nextInt();
+                scanner.nextLine(); // Limpar o buffer do scanner
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Aqui pode verificar os voos atualmente em vigor");
-                    Voos.exibirVoos(listavoos);
-                    break;
-                case 2:
-                    System.out.println("Registe-se num voo!");
-                    System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Aqui pode verificar os voos atualmente em vigor");
+                        Voos.exibirVoos(listavoos);
+                        break;
+                    case 2:
+                        System.out.println("Registe-se num voo!");
+                        System.out.print("Nome: ");
+                        String nome = scanner.nextLine();
 
-                    System.out.print("País: ");
-                    String pais = scanner.nextLine();
+                        System.out.print("País: ");
+                        String pais = scanner.nextLine();
 
 
-                    System.out.print("Possui bagagem extra? (sim/não): ");
-                    boolean bagagemExtra = scanner.nextLine().equalsIgnoreCase("sim");
+                        System.out.print("Possui bagagem extra? (sim/não): ");
+                        boolean bagagemExtra = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    System.out.print("Quer usufruir de um seguro? (sim/não): ");
-                    boolean seguro = scanner.nextLine().equalsIgnoreCase("sim");
+                        System.out.print("Quer usufruir de um seguro? (sim/não): ");
+                        boolean seguro = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    System.out.print("Check-in automático ativado? (sim/não): ");
-                    boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
+                        System.out.print("Check-in automático ativado? (sim/não): ");
+                        boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
-                    // Carregar os voos do arquivo JSON
-                    Json jsonReader = new Json(); // Renomeando a variável para evitar conflito
-                    List<Voos> voosDisponiveis;
-                    boolean arquivoExiste = false;
-                    try {
-                        voosDisponiveis = (List<Voos>) jsonReader.ler_voos();
-                        arquivoExiste = true;
-                    } catch (FileNotFoundException e) {
-                        voosDisponiveis = Voos.criarListaDeVoosAleatorios();
-                    }
+                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
+                        // Carregar os voos do arquivo JSON
+                        Json jsonReader = new Json(); // Renomeando a variável para evitar conflito
+                        List<Voos> voosDisponiveis;
+                        boolean arquivoExiste = false;
+                        try {
+                            voosDisponiveis = (List<Voos>) jsonReader.ler_voos();
+                            arquivoExiste = true;
+                        } catch (FileNotFoundException e) {
+                            voosDisponiveis = Voos.criarListaDeVoosAleatorios();
+                        }
 
-                    // Se o arquivo existir e já houver voos, utiliza-se a lista carregada do arquivo
-                    if (arquivoExiste && voosDisponiveis != null && !voosDisponiveis.isEmpty()) {
-                        listavoos.clear(); // Limpar a lista existente
-                        listavoos.addAll(voosDisponiveis); // Adicionar os voos carregados do arquivo
-                    }
-                    // Exibir os voos disponíveis
-                    System.out.println("Voos Disponíveis:");
-                    Voos.exibirVoos(voosDisponiveis);
+                        // Se o arquivo existir e já houver voos, utiliza-se a lista carregada do arquivo
+                        if (arquivoExiste && voosDisponiveis != null && !voosDisponiveis.isEmpty()) {
+                            listavoos.clear(); // Limpar a lista existente
+                            listavoos.addAll(voosDisponiveis); // Adicionar os voos carregados do arquivo
+                        }
+                        // Exibir os voos disponíveis
+                        System.out.println("Voos Disponíveis:");
+                        Voos.exibirVoos(voosDisponiveis);
 
-                    // Permitir que o usuário selecione um voo
-                    System.out.print("Escolha o número do voo desejado: ");
-                    int numeroVooEscolhido = scanner.nextInt();
+                        // Permitir que o usuário selecione um voo
+                        System.out.print("Escolha o número do voo desejado: ");
+                        int numeroVooEscolhido = scanner.nextInt();
 
-                    // Obter o voo selecionado pelo usuário
-                    Voos vooSelecionado = voosDisponiveis.get(numeroVooEscolhido - 1);
+                        // Obter o voo selecionado pelo usuário
+                        Voos vooSelecionado = voosDisponiveis.get(numeroVooEscolhido - 1);
 
-                    listapessoas.add(novoPassageiro);
+                        listapessoas.add(novoPassageiro);
 
-                    // Utilize o voo selecionado, não o primeiro voo da lista original
-                    double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
-                    System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
-                    System.out.println("Preço do voo: " + precoFinal + "€");
-                    break;
-                case 3:
-                    System.out.println("Esta funcionalidade atualmente não se encontra \n");
-                    break;
-                case 4:
-                    System.out.println("Obrigado por voar conosco! Até a próxima.\n");
-                    json.salvar_passageiros(listapessoas);
-                    json.salvar_voos(listavoos);
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Opção inválida. Escolha uma opção válida.\n");
-                    break;
+                        // Utilize o voo selecionado, não o primeiro voo da lista original
+                        double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
+                        System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
+                        System.out.println("Preço do voo: " + precoFinal + "€");
+                        break;
+                    case 3:
+                        System.out.println("Esta funcionalidade atualmente não se encontra \n");
+                        break;
+                    case 4:
+                        System.out.println("Obrigado por voar conosco! Até a próxima.\n");
+                        json.salvar_passageiros(listapessoas);
+                        json.salvar_voos(listavoos);
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Escolha uma opção válida.\n");
+                        break;
+                }
             }
-        } while (opcao > 4);
+            while (opcao > 4) ;
+        }
     }
 }

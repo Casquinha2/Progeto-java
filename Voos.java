@@ -117,15 +117,20 @@ public class Voos {
         List<Voos> listaVoos = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i < 4; i++) {
+        while (listaVoos.size() < 4) {
             Voos voo = new Voos();
-            voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
-            voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
-            voo.setPreco(50*i+100);
-            voo.setLugaresReservados(random.nextInt(30));
-            voo.setLugaresLivres(126-voo.getLugaresReservados());
+            String paisSaida = voo.getPaisSaida();
+            String paisChegada = voo.getPaisChegada();
 
-            listaVoos.add(voo);
+            if (!paisSaida.equals(paisChegada)) {
+                voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
+                voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
+                voo.setPreco(50 * listaVoos.size() + 100);
+                voo.setLugaresReservados(random.nextInt(30));
+                voo.setLugaresLivres(126 - voo.getLugaresReservados());
+
+                listaVoos.add(voo);
+            }
         }
 
         return listaVoos;
