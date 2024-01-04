@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 
 public class Texto {
-    public void MensagemEntrada(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
+    public void MensagemEntrada(){
         System.out.println("Bem-vindo à WingWays, a sua passagem para aventuras pelo céu!");
         System.out.println("Aqui, você pode reservar seu assento para voos incríveis ao redor do mundo.");
         System.out.println("Prepare-se para decolar para novos destinos e experiências inesquecíveis.");
         System.out.println("Vamos começar a planejar sua próxima jornada juntos!");
 
-        exibirMenu(listapessoas, listavoos);
+
     }
 
-    private void exibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
+    public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -55,33 +55,17 @@ public class Texto {
                         boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
 
                         Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
-                        // Carregar os voos do arquivo JSON
-                        Json jsonReader = new Json(); // Renomeando a variável para evitar conflito
-                        List<Voos> voosDisponiveis;
-                        boolean arquivoExiste = false;
-                        try {
-                            voosDisponiveis = (List<Voos>) jsonReader.ler_voos();
-                            arquivoExiste = true;
-                        } catch (FileNotFoundException e) {
-                            voosDisponiveis = Voos.criarListaDeVoosAleatorios();
-                        }
 
-                        // Se o arquivo existir e já houver voos, utiliza-se a lista carregada do arquivo
-                        if (arquivoExiste && voosDisponiveis != null && !voosDisponiveis.isEmpty()) {
-                            listavoos.clear(); // Limpar a lista existente
-                            listavoos.addAll(voosDisponiveis); // Adicionar os voos carregados do arquivo
-                        }
                         // Exibir os voos disponíveis
                         System.out.println("Voos Disponíveis:");
-                        Voos.exibirVoos(voosDisponiveis);
+                        Voos.exibirVoos(listavoos);
 
                         // Permitir que o usuário selecione um voo
-                        System.out.print("Escolha o número do voo desejado: ");
+                        System.out.print("\nEscolha o número do voo desejado: ");
                         int numeroVooEscolhido = scanner.nextInt();
 
                         // Obter o voo selecionado pelo usuário
-                        Voos vooSelecionado = voosDisponiveis.get(numeroVooEscolhido - 1);
-
+                        Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
                         listapessoas.add(novoPassageiro);
 
                         // Utilize o voo selecionado, não o primeiro voo da lista original

@@ -1,3 +1,5 @@
+import java.awt.*;
+
 class Assento { // Renomeando a classe para Assento
     private String numero;
     private int fila;
@@ -15,4 +17,6 @@ class Assento { // Renomeando a classe para Assento
     public String toString() {
         return "Assento " + numero + ": Fila " + fila + ", Coluna " + coluna + ", Local " + local + ", Classe " + classe;
     }
+
+
 }

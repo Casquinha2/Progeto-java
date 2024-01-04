@@ -37,12 +37,11 @@ public class Aviao {
         System.out.println("Número de lugares: " + this.numeroDeLugares);
     }
 
-    private List<Assento> gerarAssentos() {
+    public List<Assento> gerarAssentos() {
         List<Assento> assentos = new ArrayList<>();
         if(Objects.equals(this.modelo, "Boeing 737")) {
             for (int fila = 1; fila <= 3; fila++) {
                 String classe = "Business";
-
                 for (char coluna = 'A'; coluna <= 'D'; coluna++) {
                     String local;
                     if (coluna == 'A' || coluna == 'D') {
@@ -56,7 +55,34 @@ public class Aviao {
             }
             for (int fila = 4; fila <=22 ; fila++) {
                 String classe = "Económico";
-
+                for (char coluna = 'A'; coluna <= 'F'; coluna++) {
+                    String Local;
+                    if (coluna == 'A' || coluna == 'F') {
+                        Local = "Janela";
+                    } else if (coluna == 'C' || coluna == 'D') {
+                        Local = "Corredor";
+                    } else {
+                        Local = "Meio";
+                    }
+                    Assento assento = new Assento("" + fila + coluna, fila, coluna, Local, classe);
+                    assentos.add(assento);
+                }
+            }
+        }
+        else{
+            for(int fila = 1; fila <= 7; fila++){
+                String classe = "Business";
+                for(char coluna = 'A'; coluna <= 'D';coluna++){
+                    String local;
+                    if (coluna == 'A' || coluna == 'D'){
+                        local = "Janela";
+                    } else{
+                        local = "Corredor";
+                    }
+                }
+            }
+            for(int fila = 8; fila <= 30; fila++){
+                String classe = "Económico";
                 for (char coluna = 'A'; coluna <= 'F'; coluna++) {
                     String Local;
                     if (coluna == 'A' || coluna == 'F') {

@@ -2,11 +2,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.time.temporal.ChronoUnit;
 
 public class Voos {
+
     private String paisSaida;
     private String paisChegada;
     private LocalDateTime HorarioDePartida;
@@ -40,11 +42,13 @@ public class Voos {
     }
 
     private static final List<String> paises = List.of(
-            "Portugal","Brasil", "EUA", "Canadá", "Reino Unido", "Alemanha", "França", "Japão", "Austrália", "China", "Índia"
+            "Portugal", "Brasil", "EUA", "Canadá", "Reino Unido", "Alemanha", "França", "Japão", "Austrália", "China", "Índia"
     );
+
     private String obterPaisAleatorio(Random random) {
         return paises.get(random.nextInt(paises.size()));
     }
+
     public String getPaisSaida() {
         return this.paisSaida;
     }
@@ -126,8 +130,6 @@ public class Voos {
                 voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
                 voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
                 voo.setPreco(50 * listaVoos.size() + 100);
-                voo.setLugaresReservados(random.nextInt(30));
-                voo.setLugaresLivres(126 - voo.getLugaresReservados());
 
                 listaVoos.add(voo);
             }
@@ -136,10 +138,27 @@ public class Voos {
         return listaVoos;
     }
 
+    public static List<Assento> Reserva(List<Assento> assentos) {
+        Random random = new Random();
+        List<Assento> listareservados = new LinkedList<>();
+        int i = (int) (assentos.size() * 0.8 + random.nextInt((int) (assentos.size() * 0.9 - assentos.size() * 0.8 + 1)));
+        for (int j = 0; j < +i - 1; j++) {
+            int k = random.nextInt(assentos.size());
+            Assento temp = assentos.remove(k);
+            listareservados.add(temp);
+        }
+        return listareservados;
+    }
+
+
     public static void exibirVoos(List<Voos> listaVoos) {
+        int i = 1;
         for (Voos voo : listaVoos) {
+            System.out.print("\n" + i + "- ");
             voo.informacoesDoVoo();
-            System.out.println(); // Adicionar linha em branco entre informações dos voos
+            // Adicionar linha em branco entre informações dos voos
+            i++;
         }
     }
 }
+
