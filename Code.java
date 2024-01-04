@@ -17,7 +17,7 @@ public class Code {
         List<Assento> a320assento1 = (List<Assento>) aviaoa320.gerarAssentos();
         List<Assento> a320assento2 = a320assento1;
 
-        for (int i = 1; 1 <= listavoos.size(); i++){
+        for (int i = 1; i <= listavoos.size(); i++){
             if (i==1) {
                 List<Assento> reservado1 = Voos.Reserva(boiengassento1);
                 boiengassento1.removeAll(reservado1);
