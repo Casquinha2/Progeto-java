@@ -43,7 +43,6 @@ public class Json {
             listapessoas = gson.fromJson(reader, tipo);
             reader.close();
             File file = new File("Passageiros.json");
-            file.delete();
             return listapessoas;
 
         } catch (FileNotFoundException e) {
@@ -80,7 +79,6 @@ public class Json {
             listavoos = gson.fromJson(reader, tipo);
             reader.close();
             File file = new File("Voos.json");
-            file.delete();
             if(listavoos== null){
                 throw new FileNotFoundException();
             }
