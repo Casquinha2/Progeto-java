@@ -38,7 +38,7 @@ public class Code {
             }
         }
 
-        textoincio.MensagemEntrada();
+        textoincio.MensagemEntrada(listapessoas,listavoos);
         while (true) {
             textoincio.ExibirMenu(listapessoas, listavoos);
         }

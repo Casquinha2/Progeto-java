@@ -45,7 +45,7 @@ public class Aviao {
         return assentosDisponiveis;
     }
 
-    private List<Assento> gerarAssentos() {
+    public List<Assento> gerarAssentos() {
         List<Assento> assentos = new ArrayList<>();
         if (Objects.equals(this.modelo, "Boeing 737")) {
             for (int fila = 1; fila <= 3; fila++) {
