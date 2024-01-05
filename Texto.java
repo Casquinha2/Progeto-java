@@ -10,10 +10,10 @@ public class Texto {
         System.out.println("Prepare-se para decolar para novos destinos e experiências inesquecíveis.");
         System.out.println("Vamos começar a planejar sua próxima jornada juntos!");
 
-        exibirMenu(listapessoas, listavoos);
+        ExibirMenu(listapessoas, listavoos);
     }
 
-    private void exibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
+    public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -70,7 +70,7 @@ public class Texto {
                     scanner.nextLine(); // Consumir a nova linha deixada pelo nextInt()
 
                     Voos vooSelecionados = listavoos.get(escolhaVoo - 1);
-                    vooSelecionados.exibirAssentosDisponiveis();
+                    vooSelecionados.ExibirAssentosDisponiveis();
 
                     System.out.print("Escolha uma fila (digite o número da fila): ");
                     int numeroFila = scanner.nextInt();
