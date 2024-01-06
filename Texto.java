@@ -14,7 +14,7 @@ public class Texto {
 
     }
 
-    public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos) throws IOException {
+    public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4 ) throws IOException {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -80,6 +80,7 @@ public class Texto {
                         System.out.println("Obrigado por voar conosco! Até a próxima.\n");
                         json.salvar_passageiros(listapessoas);
                         json.salvar_voos(listavoos);
+                        Json.salvarAssentosJSON(listavoos,voo1,voo2,voo3,voo4);
                         System.exit(0);
                         break;
                     default:
