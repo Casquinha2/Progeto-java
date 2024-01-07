@@ -157,20 +157,17 @@ public class Json {
                     livres2.add(l);
                 }
                 livres2.removeAll(reservados2);
-                System.out.println(livres2);
                 assentosPorVoo.add(String.valueOf(reservados2));
                 assentosPorVoo.add(String.valueOf(livres2));
             }else if (i==3) {
                 List<String> reservados3;
                 List<String> livres3 = new ArrayList<>();
                 reservados3 = Voos.Reserva(voo3);
-                System.out.println(reservados3);
                 for (Assento k:voo3){
                     l = k.getNumero();
                     livres3.add(l);
                 }
                 livres3.removeAll(reservados3);
-                System.out.println(livres3);
                 assentosPorVoo.add(String.valueOf(reservados3));
                 assentosPorVoo.add(String.valueOf(livres3));
             }else {

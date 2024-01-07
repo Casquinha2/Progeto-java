@@ -131,8 +131,16 @@ public class Voos {
             String paisSaida = voo.getPaisSaida();
             String paisChegada = voo.getPaisChegada();
             if (!paisSaida.equals(paisChegada)) {
-                voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
-                voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
+                LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
+                        .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                LocalDateTime horarioChegada;
+                do {
+                    horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
+                            .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
+
+                voo.setHorarioDePartida(horarioPartida);
+                voo.setHorarioDeChegada(horarioChegada);
                 voo.setPreco(50 * listaVoos.size() + 100);
                 listaVoos.add(voo);
             }
@@ -148,8 +156,16 @@ public class Voos {
             String paisSaida = voo.getPaisSaida();
             String paisChegada = voo.getPaisChegada();
             if (!paisSaida.equals(paisChegada)) {
-                voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
-                voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
+                LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
+                        .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                LocalDateTime horarioChegada;
+                do {
+                    horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
+                            .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
+
+                voo.setHorarioDePartida(horarioPartida);
+                voo.setHorarioDeChegada(horarioChegada);
                 voo.setPreco(50 * listaVoos.size() + 100);
                 listaVoos.add(voo);
             }
