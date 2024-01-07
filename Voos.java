@@ -121,16 +121,36 @@ public class Voos {
         List<Voos> listaVoos = new ArrayList<>();
         Random random = new Random();
 
-        while (listaVoos.size() < 4) {
+        // Gerar 2 voos com 126 lugares livres
+        for (int i = 0; i < 2; i++) {
             Voos voo = new Voos();
+            voo.setLugaresLivres(126);
+            voo.setLugaresReservados(0);
+
+            // Definir outras propriedades do voo aleatoriamente
             String paisSaida = voo.getPaisSaida();
             String paisChegada = voo.getPaisChegada();
-
             if (!paisSaida.equals(paisChegada)) {
                 voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
                 voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
                 voo.setPreco(50 * listaVoos.size() + 100);
+                listaVoos.add(voo);
+            }
+        }
 
+        // Gerar 2 voos com 180 lugares livres
+        for (int i = 0; i < 2; i++) {
+            Voos voo = new Voos();
+            voo.setLugaresLivres(166);
+            voo.setLugaresReservados(0);
+
+            // Definir outras propriedades do voo aleatoriamente
+            String paisSaida = voo.getPaisSaida();
+            String paisChegada = voo.getPaisChegada();
+            if (!paisSaida.equals(paisChegada)) {
+                voo.setHorarioDePartida(LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS));
+                voo.setHorarioDeChegada(voo.getHorarioDePartida().plus(random.nextInt(15), ChronoUnit.DAYS));
+                voo.setPreco(50 * listaVoos.size() + 100);
                 listaVoos.add(voo);
             }
         }
@@ -138,17 +158,26 @@ public class Voos {
         return listaVoos;
     }
 
-    public static List<Assento> Reserva(List<Assento> assentos) {
+    public static List<String> Reserva(List<Assento> assentos) {
         Random random = new Random();
-        List<Assento> listareservados = new LinkedList<>();
-        int i = (int) (assentos.size() * 0.8 + random.nextInt((int) (assentos.size() * 0.9 - assentos.size() * 0.8 + 1)));
+        List<String> listareservados = new ArrayList<>();
+        String l;
+        List<String> temporario = new ArrayList<>();
+
+        for (Assento assento: assentos){
+            l = assento.getNumero();
+            temporario.add(l);
+        }
+        int i = (int) (temporario.size() * 0.8 + random.nextInt((int) (temporario.size() * 0.9 - temporario.size() * 0.8 + 1)));
         for (int j = 0; j < +i - 1; j++) {
-            int k = random.nextInt(assentos.size());
-            Assento temp = assentos.remove(k);
+            int k = random.nextInt(temporario.size());
+            String temp = temporario.remove(k);
             listareservados.add(temp);
         }
         return listareservados;
     }
+
+
 
 
     public static void exibirVoos(List<Voos> listaVoos) {

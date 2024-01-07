@@ -1,1 +1,1 @@
-[{"nome":"eric","id":0,"lugar_reservado":0,"pais":"portugal","seguro":false,"bagagem_extra":false,"check_in_automatico":false},{"nome":"eric","id":0,"lugar_reservado":0,"pais":"portugal","seguro":true,"bagagem_extra":true,"check_in_automatico":true}]
+[{"nome":"ola","id":0,"lugarreservado":0,"pais":"yah","seguro":false,"bagagemExtra":true,"checkInAutomatico":true,"metodoPagamento":"PayPal"}]

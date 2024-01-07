@@ -1,3 +1,4 @@
+import java.util.List;
 
 class Assento { // Renomeando a classe para Assento
     private String numero;
@@ -7,14 +8,19 @@ class Assento { // Renomeando a classe para Assento
     private String classe;
     private boolean reservado; // Adicionado atributo reservado
 
-    public Assento(int numer) {
-        this.numero = Integer.toString(numer);
-        this.fila = numer; // Você pode definir a fila como o número
-        this.coluna = 'A'; // Por exemplo, definir a coluna como 'A' inicialmente
-        this.local = "Indefinido"; // Definir o local como "Indefinido" inicialmente
-        this.classe = "Indefinido"; // Definir a classe como "Indefinido" inicialmente
-        this.reservado = false; // Inicializado como não reservado
+    public Assento(String numero, int fila, char coluna, String local, String classe) {
+        this.numero= numero;
+        this.fila = fila; // Você pode definir a fila como o número
+        this.coluna = coluna;
+        this.local = local;
+        this.classe = classe;
+        this.reservado = false;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
     public boolean isReservado() {
         return reservado;
     }
@@ -23,8 +29,11 @@ class Assento { // Renomeando a classe para Assento
         this.reservado = reservado;
     }
 
+    @Override
     public String toString() {
-        return "Assento " + numero + ": Fila " + fila + ", Coluna " + coluna + ", Local " + local + ", Classe " + classe;
+        // Implemente o método toString para representar os assentos como desejar
+        // Retorne uma string com informações relevantes do assento
+        return "Assento: " + numero + ", Fila: " + fila + ", Coluna: " + coluna + ", Local: " + local + ", Classe: " + classe;
     }
     public int getFila() {
         return fila;

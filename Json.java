@@ -119,68 +119,71 @@ public class Json {
     }
 
     public static void salvarAssentosJSON(List<Voos> listavoos,List<Assento>voo1,List<Assento>voo2,List<Assento>voo3,List<Assento>voo4) {
-        List<List<Assento>> listaAssentos = TransformarListaAssentos(listavoos,voo1,voo2,voo3,voo4);
+        List<String> listaAssentos = TransformarListaAssentos(listavoos,voo1,voo2,voo3,voo4);
         Gson gson = new Gson();
-        List<List<Assento>> todasListas = new ArrayList<>();
-
-        for (List<Assento> lista : listaAssentos) {
-            todasListas.add(lista);
-        }
 
         try (FileWriter writer = new FileWriter("Assentos.json")) {
-            String json = gson.toJson(todasListas);
+            String json = gson.toJson(listaAssentos);
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static List<List<Assento>> TransformarListaAssentos(List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4){
-        List<List<Assento>> assentosPorVoo = new ArrayList<>();
-        List<Assento> assentos = new ArrayList<>();
-        for (int i = 0; i < listavoos.size(); i++) {
+    public static List<String> TransformarListaAssentos(List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4){
+        String l;
+        List<String> assentosPorVoo = new ArrayList<>();
+        for (int i = 1; i <= 4; i++) {
 
 
-            switch (i) {
-                case 0:
-                    List<Assento> reservados1 = new ArrayList<>();
-                    List<Assento> livres1;
-                    reservados1 = Voos.Reserva(voo1);
-                    voo1.removeAll(reservados1);
-                    livres1 = new ArrayList<>(voo1);
-                    assentos.addAll(reservados1);
-                    assentos.addAll(livres1);
-                    assentosPorVoo.add(assentos);
-                    break;
-                case 1:
-                    List<Assento> reservados2 = new ArrayList<>();
-                    List<Assento> livres2;
-                    reservados2 = Voos.Reserva(voo2);
-                    voo2.removeAll(reservados2);
-                    livres2 = new ArrayList<>(voo2);
-                    assentos.addAll(reservados2);
-                    assentos.addAll(livres2);
-                    assentosPorVoo.add(assentos);
-                    break;
-                case 2:
-                    List<Assento> reservados3 = new ArrayList<>();
-                    List<Assento> livres3;
-                    reservados3 = Voos.Reserva(voo3);
-                    voo3.removeAll(reservados3);
-                    livres3 = new ArrayList<>(voo3);
-                    assentos.addAll(reservados3);
-                    assentos.addAll(livres3);
-                    assentosPorVoo.add(assentos);
-                    break;
-                default:
-                    List<Assento> reservados4 = new ArrayList<>();
-                    List<Assento> livres4;
+            if (i==1) {
+                List<String> reservados1;
+                List<String> livres1 = new ArrayList<>();
+                reservados1 = Voos.Reserva(voo1);
+
+                for (Assento k:voo1){
+                    l = k.getNumero();
+                    livres1.add(l);
+                }
+                livres1.removeAll(reservados1);
+                assentosPorVoo.add(String.valueOf(reservados1));
+                assentosPorVoo.add(String.valueOf(livres1));
+            }else if (i==2) {
+                List<String> reservados2;
+                List<String> livres2 = new ArrayList<>();
+                reservados2 = Voos.Reserva(voo2);
+                System.out.println(reservados2);
+                for (Assento k:voo2){
+                    l = k.getNumero();
+                    livres2.add(l);
+                }
+                livres2.removeAll(reservados2);
+                System.out.println(livres2);
+                assentosPorVoo.add(String.valueOf(reservados2));
+                assentosPorVoo.add(String.valueOf(livres2));
+            }else if (i==3) {
+                List<String> reservados3;
+                List<String> livres3 = new ArrayList<>();
+                reservados3 = Voos.Reserva(voo3);
+                System.out.println(reservados3);
+                for (Assento k:voo3){
+                    l = k.getNumero();
+                    livres3.add(l);
+                }
+                livres3.removeAll(reservados3);
+                System.out.println(livres3);
+                assentosPorVoo.add(String.valueOf(reservados3));
+                assentosPorVoo.add(String.valueOf(livres3));
+            }else {
+                    List<String> reservados4;
+                    List<String> livres4 = new ArrayList<>();
                     reservados4 = Voos.Reserva(voo4);
-                    voo4.removeAll(reservados4);
-                    livres4 = new ArrayList<>(voo4);
-                    assentos.addAll(reservados4);
-                    assentos.addAll(livres4);
-                    assentosPorVoo.add(assentos);
-                    break;
+                    for (Assento k:voo4){
+                        l = k.getNumero();
+                        livres4.add(l);
+                    }
+                    livres4.removeAll(reservados4);
+                    assentosPorVoo.add(String.valueOf(reservados4));
+                    assentosPorVoo.add(String.valueOf(livres4));
             }
         }
         return assentosPorVoo;

@@ -13,16 +13,14 @@ public class Code {
 
         // Criar aviões
         Aviao aviaoboieng737 = new Aviao(126, "Boeing 737");
-        Aviao aviaoa320 = new Aviao(180, "A320");
+        Aviao aviaoa320 = new Aviao(166, "A320");
 
         // Gerar assentos para os aviões
-        List<Assento> boiengassento1 = aviaoboieng737.gerarAssentos();
+        List<Assento> boiengassento1 = aviaoboieng737.gerarAssentos("Boeing 737");
         List<Assento> boiengassento2 = new ArrayList<>(boiengassento1); // Cópia dos assentos
-        List<Assento> a320assento1 = aviaoa320.gerarAssentos();
+        List<Assento> a320assento1 = aviaoa320.gerarAssentos("A320");
         List<Assento> a320assento2 = new ArrayList<>(a320assento1); // Cópia dos assentos
-
         // Salvar os assentos associados aos voos no arquivo JSON
-        Json.salvarAssentosJSON(listavoos,boiengassento1,boiengassento2,a320assento1,a320assento2);
 
         textoincio.MensagemEntrada();
         while (true) {
