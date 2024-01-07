@@ -101,7 +101,7 @@ public class Texto {
                         vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
 
                         // Atualizar o número de lugares reservados no voo selecionado
-                        vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() + 1);
+                        vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() - 1);
 
                         // Adicionar o novo passageiro à lista de passageiros do voo
                         listapessoas.add(novoPassageiro);
