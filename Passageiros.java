@@ -8,7 +8,8 @@ public class Passageiros {
     private boolean bagagemExtra;
     private boolean checkInAutomatico;
 
-    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico) {
+    private String metodoPagamento ;
+    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico ,String metodoPagamento) {
         this.nome = nome;
         this.pais = pais;
         this.id = nextid++;
@@ -16,6 +17,7 @@ public class Passageiros {
         this.seguro = seguro;
         this.bagagemExtra = bagagemExtra;
         this.checkInAutomatico = checkInAutomatico;
+        this.metodoPagamento = metodoPagamento ;
     }
 
     // Getters and setters for the new attributes
@@ -47,6 +49,14 @@ public class Passageiros {
         return this.id;
     }
 
+    public String getMetodoPagamento() {
+        return this.metodoPagamento;
+    }
+
+    public void setMetodoPagamento(String metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
+    }
+
     @Override
     public String toString() {
         return "Passageiros{" +
@@ -57,7 +67,8 @@ public class Passageiros {
                 ", seguro=" + seguro +
                 ", bagagemExtra=" + bagagemExtra +
                 ", checkInAutomatico=" + checkInAutomatico +
-                '}';
+                ", metodoPagamento=" + metodoPagamento +
+        '}';
     }
 
     public double calcularPrecoVoo(Voos voo) {
