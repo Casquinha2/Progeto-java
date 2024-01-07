@@ -1,21 +1,23 @@
 public class Passageiros {
     private String nome;
     private int id;
-    private static int next_id = 0;
-    private int lugar_reservado;
+    private static int nextid = 0;
+    private int lugarreservado;
     private String pais;
     private boolean seguro;
-    private boolean bagagem_extra;
-    private boolean check_in_automatico;
+    private boolean bagagemExtra;
+    private boolean checkInAutomatico;
 
-    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico) {
+    private String metodoPagamento ;
+    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico ,String metodoPagamento) {
         this.nome = nome;
         this.pais = pais;
-        this.id = next_id++;
-        this.lugar_reservado = 0;
+        this.id = nextid++;
+        this.lugarreservado = 0;
         this.seguro = seguro;
-        this.bagagem_extra = bagagemExtra;
-        this.check_in_automatico = checkInAutomatico;
+        this.bagagemExtra = bagagemExtra;
+        this.checkInAutomatico = checkInAutomatico;
+        this.metodoPagamento = metodoPagamento ;
     }
 
     // Getters and setters for the new attributes
@@ -28,23 +30,31 @@ public class Passageiros {
     }
 
     public boolean isBagagemExtra() {
-        return bagagem_extra;
+        return bagagemExtra;
     }
 
     public void setBagagemExtra(boolean bagagemExtra) {
-        this.bagagem_extra = bagagemExtra;
+        this.bagagemExtra = bagagemExtra;
     }
 
     public boolean isCheckInAutomatico() {
-        return check_in_automatico;
+        return checkInAutomatico;
     }
 
     public void setCheckInAutomatico(boolean checkInAutomatico) {
-        this.check_in_automatico = checkInAutomatico;
+        this.checkInAutomatico = checkInAutomatico;
     }
 
     public int getId() {
         return this.id;
+    }
+
+    public String getMetodoPagamento() {
+        return this.metodoPagamento;
+    }
+
+    public void setMetodoPagamento(String metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
     }
 
     @Override
@@ -52,24 +62,25 @@ public class Passageiros {
         return "Passageiros{" +
                 "nome='" + nome + '\'' +
                 ", id=" + id +
-                ", lugar_reservado=" + lugar_reservado +
+                ", lugarreservado=" + lugarreservado +
                 ", pais='" + pais + '\'' +
                 ", seguro=" + seguro +
-                ", bagagem_extra=" + bagagem_extra +
-                ", check_in_automatico=" + check_in_automatico +
-                '}';
+                ", bagagemExtra=" + bagagemExtra +
+                ", checkInAutomatico=" + checkInAutomatico +
+                ", metodoPagamento=" + metodoPagamento +
+        '}';
     }
 
     public double calcularPrecoVoo(Voos voo) {
         double precoFinal = voo.getPreco(); // Preço base do voo
 
-        // Adiciona 20€ se o passageiro escolher seguro
+        // Adiciona 20€ se o passageiro escolher segur
         if (this.seguro) {
             precoFinal += 20;
         }
 
         // Adiciona 50€ se o passageiro tiver bagagem extra
-        if (this.bagagem_extra) {
+        if (this.bagagemExtra) {
             precoFinal += 50;
         }
 

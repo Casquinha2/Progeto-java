@@ -54,7 +54,36 @@ public class Texto {
                         System.out.print("Check-in automático ativado? (sim/não): ");
                         boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
 
-                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico);
+                        System.out.println("Escolha o método de pagamento:");
+                        System.out.println("4. Cartão de Crédito");
+                        System.out.println("5. Dinheiro");
+                        System.out.println("6. PayPal");
+                        System.out.print("Opção de método de pagamento:(escolha o numero) ");
+                        int opcaoPagamento = scanner.nextInt();
+                        scanner.nextLine(); // Limpar o buffer do scanner
+
+                        String metodoPagamento = "";
+
+                        // Converter a opção numérica para o método de pagamento correspondente
+                        switch (opcaoPagamento) {
+                            case 4:
+                                metodoPagamento = "Cartão de Crédito";
+                                break;
+                            case 5:
+                                metodoPagamento = "Dinheiro";
+                                break;
+                            case 6:
+                                metodoPagamento = "PayPal";
+                                break;
+                            default:
+                                System.out.println("Opção inválida. Método de pagamento definido como 'Não especificado'.");
+                                metodoPagamento = "Não especificado";
+                                break;
+                        }
+
+                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento);
+
+
 
                         // Exibir os voos disponíveis
                         System.out.println("Voos Disponíveis:");
@@ -66,6 +95,15 @@ public class Texto {
 
                         // Obter o voo selecionado pelo usuário
                         Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
+
+
+                        // Atualizar o número de lugares reservados no voo selecionado
+                        vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
+
+                        // Atualizar o número de lugares reservados no voo selecionado
+                        vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() + 1);
+
+                        // Adicionar o novo passageiro à lista de passageiros do voo
                         listapessoas.add(novoPassageiro);
 
                         // Utilize o voo selecionado, não o primeiro voo da lista original
