@@ -8,6 +8,7 @@ public class Code {
         Texto textoincio = new Texto();
 
         // Carregar voos do arquivo JSON
+        List<Passageiros> listapessoas = (List<Passageiros>) json.ler_passageiros();
         List<Voos> listavoos = (List<Voos>) json.ler_voos();
 
         // Criar aviões
@@ -23,7 +24,7 @@ public class Code {
         // Salvar os assentos associados aos voos no arquivo JSON
         Json.salvarAssentosJSON(listavoos,boiengassento1,boiengassento2,a320assento1,a320assento2);
 
-        textoincio.MensagemEntrada(listapessoas,listavoos);
+        textoincio.MensagemEntrada();
         while (true) {
             textoincio.ExibirMenu(json.ler_passageiros(), listavoos,boiengassento1,boiengassento2,a320assento1,a320assento2);
         }
