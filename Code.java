@@ -1,50 +1,36 @@
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Code {
     public Code() throws IOException {
-
-
         Json json = new Json();
         Texto textoincio = new Texto();
-        List<Passageiros> listapessoas = (List<Passageiros>) json.ler_passageiros();
+
+        // Carregar voos do arquivo JSON
         List<Voos> listavoos = (List<Voos>) json.ler_voos();
+
+        // Criar aviões
         Aviao aviaoboieng737 = new Aviao(126, "Boeing 737");
         Aviao aviaoa320 = new Aviao(180, "A320");
-        List<Assento> boiengassento1 = (List<Assento>) aviaoboieng737.gerarAssentos();
-        List<Assento> boiengassento2 = boiengassento1;
-        List<Assento> a320assento1 = (List<Assento>) aviaoa320.gerarAssentos();
-        List<Assento> a320assento2 = a320assento1;
 
-        for (int i = 1; i <= listavoos.size(); i++){
-            if (i==1) {
-                List<Assento> reservado1 = Voos.Reserva(boiengassento1);
-                boiengassento1.removeAll(reservado1);
-                List<Assento> livre1 = boiengassento1;
-            } else if (i==2) {
-                List<Assento> reservado2 = Voos.Reserva(boiengassento2);
-                boiengassento2.removeAll(reservado2);
-                List<Assento> livre2 = boiengassento2;
-            }else if(i==3) {
+        // Gerar assentos para os aviões
+        List<Assento> boiengassento1 = aviaoboieng737.gerarAssentos();
+        List<Assento> boiengassento2 = new ArrayList<>(boiengassento1); // Cópia dos assentos
+        List<Assento> a320assento1 = aviaoa320.gerarAssentos();
+        List<Assento> a320assento2 = new ArrayList<>(a320assento1); // Cópia dos assentos
 
-                List<Assento> reservado3 = Voos.Reserva(a320assento1);
-                a320assento1.removeAll(reservado3);
-                List<Assento> livre3 = a320assento1;
-            }else {
-                    List<Assento> reservado4 = Voos.Reserva(a320assento2);
-                    a320assento2.removeAll(reservado4);
-                    List<Assento> livre4 = a320assento2;
-            }
-        }
+        // Salvar os assentos associados aos voos no arquivo JSON
+        Json.salvarAssentosJSON(listavoos,boiengassento1,boiengassento2,a320assento1,a320assento2);
 
         textoincio.MensagemEntrada(listapessoas,listavoos);
         while (true) {
-            textoincio.ExibirMenu(listapessoas, listavoos);
+            textoincio.ExibirMenu(json.ler_passageiros(), listavoos,boiengassento1,boiengassento2,a320assento1,a320assento2);
         }
     }
 
-        //Voos VooSeiLa = new Voos();
+
+//Voos VooSeiLa = new Voos();
         //VooSeiLa.setPaisSaida("Tu casa");
         //VooSeiLa.setPaisChegada("MI CASA");
 
