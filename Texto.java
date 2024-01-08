@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,13 +64,58 @@ public class Texto {
                         System.out.print("\nEscolha o número do voo desejado: ");
                         int numeroVooEscolhido = scanner.nextInt();
 
+
+                        List<String> a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
+
+                        // Encontrar os lugares livres para o voo selecionado
+                        int numeroVoo = (numeroVooEscolhido - 1) * 2;
+                        String lugaresLivres = a.get(numeroVoo + 1);
+
+                        // Imprimir os lugares livres para o voo selecionado
+                        System.out.println("Voo " + numeroVooEscolhido + ":");
+                        System.out.println("Lugares Livres: " + lugaresLivres);
+
+                        //Permitir que o usuário selecione um lugar
+                        System.out.print("\nEscolha o seu Lugar : ");
+                        String lugarEscolhido = scanner.next().toLowerCase();
+                        String lugarEscolhidoNorm = lugarEscolhido.toLowerCase();
+
+
+                        // Verificar se o número do voo é válido
+                        if (numeroVoo <= 0 || numeroVoo * 2 - 1 >= a.size()) {
+                            System.out.println("Número do voo inválido.");
+                            return;
+                        }
+
+                        String dadosAssentosLivres = a.get(numeroVoo * 2 - 1);
+                        if (dadosAssentosLivres == null || dadosAssentosLivres.isEmpty()) {
+                            System.out.println("Dados de assentos livres não estão disponíveis.");
+                            return;
+                        }
+                        dadosAssentosLivres = dadosAssentosLivres.replace("[", "").replace("]", "");
+                        List<String> assentosLivres = new ArrayList<>(Arrays.asList(dadosAssentosLivres.toLowerCase().trim().split("\\s*,\\s*")));
+
+                        if (assentosLivres.contains(lugarEscolhidoNorm)) {
+                            // Remover o lugar escolhido da lista de lugares livres
+                            assentosLivres.remove(lugarEscolhidoNorm);
+
+                            // Adicionar o lugar escolhido à lista de lugares reservados do voo selecionado
+                            String lugaresReservados = a.get(numeroVoo * 2 - 2);
+                            if (!lugaresReservados.contains(lugarEscolhidoNorm)) {
+                                lugaresReservados += ", " + lugarEscolhidoNorm;
+                                a.set(numeroVoo * 2 - 2, lugaresReservados);
+
+                                // Atualizar os assentos do voo no arquivo JSON
+                                Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
+                                System.out.println("Lugar " + lugarEscolhido.toUpperCase() + " reservado com sucesso para o voo " + numeroVoo + ".");
+                            }
+                        } else {
+                            System.out.println("Lugar escolhido não está disponível.");
+                        }
+
                         // Obter o voo selecionado pelo usuário
                         Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
-                        List<String> a = new ArrayList<>();
-                        a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
-                        System.out.println(a);
 
-                        // Atualizar o número de lugares reservados no voo selecionado
                         vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
 
                         // Atualizar o número de lugares reservados no voo selecionado
@@ -102,7 +148,7 @@ public class Texto {
                                 break;
                         }
 
-                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento);
+                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento,lugarEscolhido);
                         // Adicionar o novo passageiro à lista de passageiros do voo
                         listapessoas.add(novoPassageiro);
 

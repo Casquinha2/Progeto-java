@@ -7,9 +7,12 @@ public class Passageiros {
     private boolean seguro;
     private boolean bagagemExtra;
     private boolean checkInAutomatico;
-
     private String metodoPagamento ;
-    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico ,String metodoPagamento) {
+    private String dadosLugar;
+    private int lugarReservado;
+
+
+    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico, String metodoPagamento, String dadosLugar) {
         this.nome = nome;
         this.pais = pais;
         this.id = nextid++;
@@ -18,6 +21,8 @@ public class Passageiros {
         this.bagagemExtra = bagagemExtra;
         this.checkInAutomatico = checkInAutomatico;
         this.metodoPagamento = metodoPagamento ;
+        this.dadosLugar = dadosLugar ;
+        this.lugarReservado = lugarReservado;
     }
 
     // Getters and setters for the new attributes
@@ -57,6 +62,14 @@ public class Passageiros {
         this.metodoPagamento = metodoPagamento;
     }
 
+    public String getDadosLugar() {
+        return this.dadosLugar;
+    }
+    public void setDadosLugar(String dadosLugar) {
+        this.dadosLugar = dadosLugar;
+    }
+
+
     @Override
     public String toString() {
         return "Passageiros{" +
@@ -68,6 +81,7 @@ public class Passageiros {
                 ", bagagemExtra=" + bagagemExtra +
                 ", checkInAutomatico=" + checkInAutomatico +
                 ", metodoPagamento=" + metodoPagamento +
+                ", dadosLugar=" + dadosLugar +
         '}';
     }
 
