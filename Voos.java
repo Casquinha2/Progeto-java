@@ -132,11 +132,11 @@ public class Voos {
             String paisChegada = voo.getPaisChegada();
             if (!paisSaida.equals(paisChegada)) {
                 LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
-                        .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                        .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
                     horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
-                            .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                            .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
 
                 voo.setHorarioDePartida(horarioPartida);
@@ -157,11 +157,11 @@ public class Voos {
             String paisChegada = voo.getPaisChegada();
             if (!paisSaida.equals(paisChegada)) {
                 LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
-                        .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                        .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
                     horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
-                            .plusHours(random.nextInt(24)).plusMinutes(random.nextInt(60));
+                            .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
 
                 voo.setHorarioDePartida(horarioPartida);

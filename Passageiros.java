@@ -2,7 +2,6 @@ public class Passageiros {
     private String nome;
     private int id;
     private static int nextid = 0;
-    private int lugarreservado;
     private String pais;
     private boolean seguro;
     private boolean bagagemExtra;
@@ -16,7 +15,6 @@ public class Passageiros {
         this.nome = nome;
         this.pais = pais;
         this.id = nextid++;
-        this.lugarreservado = 0;
         this.seguro = seguro;
         this.bagagemExtra = bagagemExtra;
         this.checkInAutomatico = checkInAutomatico;
@@ -75,7 +73,6 @@ public class Passageiros {
         return "Passageiros{" +
                 "nome='" + nome + '\'' +
                 ", id=" + id +
-                ", lugarreservado=" + lugarreservado +
                 ", pais='" + pais + '\'' +
                 ", seguro=" + seguro +
                 ", bagagemExtra=" + bagagemExtra +

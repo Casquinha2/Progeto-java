@@ -20,7 +20,7 @@ public class Texto {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
-
+        List<String> a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
         while (true) {
             {
                 System.out.println("\nEscolha uma opção:");
@@ -64,9 +64,6 @@ public class Texto {
                         System.out.print("\nEscolha o número do voo desejado: ");
                         int numeroVooEscolhido = scanner.nextInt();
 
-
-                        List<String> a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
-
                         // Encontrar os lugares livres para o voo selecionado
                         int numeroVoo = (numeroVooEscolhido - 1) * 2;
                         String lugaresLivres = a.get(numeroVoo +1 );
@@ -97,11 +94,9 @@ public class Texto {
                         }
                         dadosAssentosLivres = dadosAssentosLivres.replace("[", "").replace("]", "");
                         List<String> assentosLivres = new ArrayList<>(Arrays.asList(dadosAssentosLivres.toLowerCase().trim().split("\\s*,\\s*")));
-
                         if (assentosLivres.contains(lugarEscolhidoNorm)) {
                             // Remover o lugar escolhido da lista de lugares livres
                             assentosLivres.remove(lugarEscolhidoNorm);
-
                             // Adicionar o lugar escolhido à lista de lugares reservados do voo selecionado
                             String lugaresReservados = a.get(numeroVoo * 2 - 2);
                             if (!lugaresReservados.contains(lugarEscolhidoNorm)) {
@@ -109,8 +104,10 @@ public class Texto {
                                 a.set(numeroVoo * 2 - 2, lugaresReservados);
 
                                 // Atualizar os assentos do voo no arquivo JSON
-                                Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
                                 System.out.println("Lugar " + lugarEscolhido.toUpperCase() + " reservado com sucesso para o voo " + numeroVoo + ".");
+                            }
+                            else {
+                                System.out.println("Este lugar já se encontra reservado");
                             }
                         } else {
                             System.out.println("Lugar escolhido não está disponível.");
