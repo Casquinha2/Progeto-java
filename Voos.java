@@ -124,8 +124,8 @@ public class Voos {
         // Gerar 2 voos com 126 lugares livres
         for (int i = 0; i < 2; i++) {
             Voos voo = new Voos();
-            voo.setLugaresLivres(126);
-            voo.setLugaresReservados(0);
+            voo.setLugaresLivres(27);
+            voo.setLugaresReservados(99);
 
             // Definir outras propriedades do voo aleatoriamente
             String paisSaida = voo.getPaisSaida();
@@ -149,8 +149,8 @@ public class Voos {
         // Gerar 2 voos com 180 lugares livres
         for (int i = 0; i < 2; i++) {
             Voos voo = new Voos();
-            voo.setLugaresLivres(166);
-            voo.setLugaresReservados(0);
+            voo.setLugaresLivres(35);
+            voo.setLugaresReservados(131);
 
             // Definir outras propriedades do voo aleatoriamente
             String paisSaida = voo.getPaisSaida();
@@ -184,7 +184,7 @@ public class Voos {
             l = assento.getNumero();
             temporario.add(l);
         }
-        int i = (int) (temporario.size() * 0.8 + random.nextInt((int) (temporario.size() * 0.9 - temporario.size() * 0.8 + 1)));
+        int i = (int) (temporario.size() * 0.8);
         for (int j = 0; j < +i - 1; j++) {
             int k = random.nextInt(temporario.size());
             String temp = temporario.remove(k);

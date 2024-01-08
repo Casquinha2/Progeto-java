@@ -118,8 +118,8 @@ public class Json {
         }
     }
 
-    public static void salvarAssentosJSON(List<Voos> listavoos,List<Assento>voo1,List<Assento>voo2,List<Assento>voo3,List<Assento>voo4) {
-        List<String> listaAssentos = TransformarListaAssentos(listavoos,voo1,voo2,voo3,voo4);
+    public static List<String> salvarAssentosJSON(List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4) {
+        List<String> listaAssentos = TransformarListaAssentos(voo1,voo2,voo3,voo4);
         Gson gson = new Gson();
 
         try (FileWriter writer = new FileWriter("Assentos.json")) {
@@ -128,8 +128,9 @@ public class Json {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return listaAssentos;
     }
-    public static List<String> TransformarListaAssentos(List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4){
+    public static List<String> TransformarListaAssentos( List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4){
         String l;
         List<String> assentosPorVoo = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
@@ -151,7 +152,6 @@ public class Json {
                 List<String> reservados2;
                 List<String> livres2 = new ArrayList<>();
                 reservados2 = Voos.Reserva(voo2);
-                System.out.println(reservados2);
                 for (Assento k:voo2){
                     l = k.getNumero();
                     livres2.add(l);

@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,7 +65,9 @@ public class Texto {
 
                         // Obter o voo selecionado pelo usuário
                         Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
-
+                        List<String> a = new ArrayList<>();
+                        a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
+                        System.out.println(a);
 
                         // Atualizar o número de lugares reservados no voo selecionado
                         vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
@@ -115,7 +118,6 @@ public class Texto {
                         System.out.println("Obrigado por voar conosco! Até a próxima.\n");
                         json.salvar_passageiros(listapessoas);
                         json.salvar_voos(listavoos);
-                        json.salvarAssentosJSON(listavoos,voo1,voo2,voo3,voo4);
                         System.exit(0);
                         break;
                     default:
