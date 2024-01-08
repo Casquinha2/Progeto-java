@@ -69,7 +69,8 @@ public class Texto {
 
                         // Encontrar os lugares livres para o voo selecionado
                         int numeroVoo = (numeroVooEscolhido - 1) * 2;
-                        String lugaresLivres = a.get(numeroVoo + 1);
+                        String lugaresLivres = a.get(numeroVoo +1 );
+
 
                         // Imprimir os lugares livres para o voo selecionado
                         System.out.println("Voo " + numeroVooEscolhido + ":");
@@ -80,13 +81,15 @@ public class Texto {
                         String lugarEscolhido = scanner.next().toLowerCase();
                         String lugarEscolhidoNorm = lugarEscolhido.toLowerCase();
 
+                        if (numeroVoo == 0) {
+                            numeroVoo = 1;
+                        }
 
                         // Verificar se o número do voo é válido
-                        if (numeroVoo <= 0 || numeroVoo * 2 - 1 >= a.size()) {
+                        if (numeroVooEscolhido < 1 || numeroVooEscolhido > listavoos.size()) {
                             System.out.println("Número do voo inválido.");
                             return;
                         }
-
                         String dadosAssentosLivres = a.get(numeroVoo * 2 - 1);
                         if (dadosAssentosLivres == null || dadosAssentosLivres.isEmpty()) {
                             System.out.println("Dados de assentos livres não estão disponíveis.");
@@ -122,9 +125,9 @@ public class Texto {
                         vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() - 1);
 
                         System.out.println("Escolha o método de pagamento:");
-                        System.out.println("4. Cartão de Crédito");
-                        System.out.println("5. Dinheiro");
-                        System.out.println("6. PayPal");
+                        System.out.println("1. Cartão de Crédito");
+                        System.out.println("2. Dinheiro");
+                        System.out.println("3. PayPal");
                         System.out.print("Opção de método de pagamento:(escolha o numero) ");
                         int opcaoPagamento = scanner.nextInt();
                         scanner.nextLine(); // Limpar o buffer do scanner
@@ -133,13 +136,13 @@ public class Texto {
 
                         // Converter a opção numérica para o método de pagamento correspondente
                         switch (opcaoPagamento) {
-                            case 4:
+                            case 1:
                                 metodoPagamento = "Cartão de Crédito";
                                 break;
-                            case 5:
+                            case 2:
                                 metodoPagamento = "Dinheiro";
                                 break;
-                            case 6:
+                            case 3:
                                 metodoPagamento = "PayPal";
                                 break;
                             default:
