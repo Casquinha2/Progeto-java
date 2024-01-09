@@ -151,9 +151,9 @@ public class Voos {
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
-                    horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
+                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS)
                             .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
-                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
+                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 1);
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);
@@ -179,9 +179,9 @@ public class Voos {
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
-                    horarioChegada = horarioPartida.plus(random.nextInt(3) + 1, ChronoUnit.DAYS)
+                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS)
                             .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
-                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 2);
+                } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 1);
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);

@@ -20,7 +20,7 @@ public class Texto {
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        List<String> a = Json.salvarAssentosJSON(voo1, voo2, voo3, voo4);
+        List<List<String>> dadosAssentos = json.carregarAssentosDoArquivo(voo1,voo2,voo3,voo4);
         while (true) {
             {
                 System.out.println("\nEscolha uma opção:");
@@ -56,69 +56,54 @@ public class Texto {
                         System.out.print("Check-in automático ativado? (sim/não): ");
                         boolean checkInAutomatico = scanner.nextLine().equalsIgnoreCase("sim");
 
-                        // Exibir os voos disponíveis
                         System.out.println("Voos Disponíveis:");
                         Voos.exibirVoos(listavoos);
 
                         // Permitir que o usuário selecione um voo
                         System.out.print("\nEscolha o número do voo desejado: ");
                         int numeroVooEscolhido = scanner.nextInt();
-
-                        // Encontrar os lugares livres para o voo selecionado
-                        int numeroVoo = (numeroVooEscolhido - 1) * 2;
-                        String lugaresLivres = a.get(numeroVoo +1 );
+                        scanner.nextLine();
 
 
-                        // Imprimir os lugares livres para o voo selecionado
+                        int indiceVoo = (numeroVooEscolhido - 1) * 2;
+
+                        if (numeroVooEscolhido < 1 || numeroVooEscolhido > listavoos.size()) {
+                            System.out.println("Número do voo inválido.");
+                            break;
+                        }
+
+                        List<String> lugaresLivres = dadosAssentos.get(indiceVoo + 1);
+
                         System.out.println("Voo " + numeroVooEscolhido + ":");
                         System.out.println("Lugares Livres: " + lugaresLivres);
 
-                        //Permitir que o usuário selecione um lugar
                         System.out.print("\nEscolha o seu Lugar : ");
-                        String lugarEscolhido = scanner.next().toLowerCase();
-                        String lugarEscolhidoNorm = lugarEscolhido.toLowerCase();
+                        String lugarEscolhido = scanner.next().trim().toUpperCase();
+                        if (lugaresLivres.stream().anyMatch(lugar -> lugar.equalsIgnoreCase(lugarEscolhido))) {
+                            lugaresLivres.removeIf(lugar -> lugar.equalsIgnoreCase(lugarEscolhido));
+                            List<String> lugaresReservados = dadosAssentos.get(indiceVoo);
+                            if (!lugaresReservados.contains(lugarEscolhido)) {
+                                lugaresReservados.add(lugarEscolhido);
+                                System.out.println("Lugar " + lugarEscolhido.toUpperCase() + " reservado com sucesso para o voo " + numeroVooEscolhido + ".");
 
-                        if (numeroVoo == 0) {
-                            numeroVoo = 1;
-                        }
+                                // Atualize a lista de dadosAssentos com os lugares reservados e livres atualizados
+                                dadosAssentos.set(indiceVoo, lugaresReservados);
+                                dadosAssentos.set(indiceVoo + 1, lugaresLivres);
 
-                        // Verificar se o número do voo é válido
-                        if (numeroVooEscolhido < 1 || numeroVooEscolhido > listavoos.size()) {
-                            System.out.println("Número do voo inválido.");
-                            return;
-                        }
-                        String dadosAssentosLivres = a.get(numeroVoo * 2 - 1);
-                        if (dadosAssentosLivres == null || dadosAssentosLivres.isEmpty()) {
-                            System.out.println("Dados de assentos livres não estão disponíveis.");
-                            return;
-                        }
-                        dadosAssentosLivres = dadosAssentosLivres.replace("[", "").replace("]", "");
-                        List<String> assentosLivres = new ArrayList<>(Arrays.asList(dadosAssentosLivres.toLowerCase().trim().split("\\s*,\\s*")));
-                        if (assentosLivres.contains(lugarEscolhidoNorm)) {
-                            // Remover o lugar escolhido da lista de lugares livres
-                            assentosLivres.remove(lugarEscolhidoNorm);
-                            // Adicionar o lugar escolhido à lista de lugares reservados do voo selecionado
-                            String lugaresReservados = a.get(numeroVoo * 2 - 2);
-                            if (!lugaresReservados.contains(lugarEscolhidoNorm)) {
-                                lugaresReservados += ", " + lugarEscolhidoNorm;
-                                a.set(numeroVoo * 2 - 2, lugaresReservados);
-
-                                // Atualizar os assentos do voo no arquivo JSON
-                                System.out.println("Lugar " + lugarEscolhido.toUpperCase() + " reservado com sucesso para o voo " + numeroVoo + ".");
-                            }
-                            else {
+                                // Chame um método para salvar essas alterações no arquivo JSON
+                                json.salvarAssentosAtualizados(dadosAssentos);
+                            } else {
                                 System.out.println("Este lugar já se encontra reservado");
                             }
                         } else {
                             System.out.println("Lugar escolhido não está disponível.");
                         }
 
-                        // Obter o voo selecionado pelo usuário
                         Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
 
                         vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
 
-                        // Atualizar o número de lugares reservados no voo selecionado
+
                         vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() - 1);
 
                         System.out.println("Escolha o método de pagamento:");
@@ -127,7 +112,7 @@ public class Texto {
                         System.out.println("3. PayPal");
                         System.out.print("Opção de método de pagamento:(escolha o numero) ");
                         int opcaoPagamento = scanner.nextInt();
-                        scanner.nextLine(); // Limpar o buffer do scanner
+                        scanner.nextLine();
 
                         String metodoPagamento = "";
 
