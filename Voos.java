@@ -117,19 +117,35 @@ public class Voos {
         System.out.println("Lugares Livres: " + this.lugaresLivres);
     }
 
+    private static final double[][] matrizDistancias = {
+            // Portugal, Brasil, EUA, Canadá, Reino Unido, Alemanha, França, Japão, Austrália, China, Índia
+            {0, 7000, 8000, 7500, 2000, 2500, 2200, 11000, 16000, 12000, 9500}, // Portugal
+            {7000, 0, 5000, 4500, 6000, 6500, 7200, 18000, 7500, 16000, 14000}, // Brasil
+            {8000, 5000, 0, 1500, 3500, 4000, 3800, 9000, 17000, 11000, 12000}, // EUA
+            {7500, 4500, 1500, 0, 4000, 4500, 4200, 8500, 16500, 10500, 11000}, // Canadá
+            {2000, 6000, 3500, 4000, 0, 500, 900, 11000, 17000, 11000, 8000},   // Reino Unido
+            {2500, 6500, 4000, 4500, 500, 0, 600, 12000, 17500, 11500, 9000},  // Alemanha
+            {2200, 7200, 3800, 4200, 900, 600, 0, 13000, 18000, 12000, 9500},  // França
+            {11000, 18000, 9000, 8500, 11000, 12000, 13000, 0, 9000, 7000, 5000}, // Japão
+            {16000, 7500, 17000, 16500, 17000, 17500, 18000, 9000, 0, 5000, 5500}, // Austrália
+            {12000, 16000, 11000, 10500, 11000, 11500, 12000, 7000, 5000, 0, 2500}, // China
+            {9500, 14000, 12000, 11000, 8000, 9000, 9500, 5000, 5500, 2500, 0}     // Índia
+    };
+
+
     public static List<Voos> criarListaDeVoosAleatorios() {
         List<Voos> listaVoos = new ArrayList<>();
         Random random = new Random();
-
         // Gerar 2 voos com 126 lugares livres
         for (int i = 0; i < 2; i++) {
             Voos voo = new Voos();
             voo.setLugaresLivres(27);
             voo.setLugaresReservados(99);
-
             // Definir outras propriedades do voo aleatoriamente
             String paisSaida = voo.getPaisSaida();
             String paisChegada = voo.getPaisChegada();
+            int indexPaisSaida = paises.indexOf(paisSaida);
+            int indexPaisChegada = paises.indexOf(paisChegada);
             if (!paisSaida.equals(paisChegada)) {
                 LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
@@ -141,7 +157,8 @@ public class Voos {
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);
-                voo.setPreco(50 * listaVoos.size() + 100);
+                double distancia = matrizDistancias[indexPaisSaida][indexPaisChegada];
+                voo.setPreco(distancia * 0.1); // Ajuste da fórmula para o preço com base na distância
                 listaVoos.add(voo);
             }
         }
@@ -155,6 +172,8 @@ public class Voos {
             // Definir outras propriedades do voo aleatoriamente
             String paisSaida = voo.getPaisSaida();
             String paisChegada = voo.getPaisChegada();
+            int indexPaisSaida = paises.indexOf(paisSaida);
+            int indexPaisChegada = paises.indexOf(paisChegada);
             if (!paisSaida.equals(paisChegada)) {
                 LocalDateTime horarioPartida = LocalDateTime.now().plus(random.nextInt(365), ChronoUnit.DAYS)
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
@@ -166,7 +185,8 @@ public class Voos {
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);
-                voo.setPreco(50 * listaVoos.size() + 100);
+                double distancia = matrizDistancias[indexPaisSaida][indexPaisChegada];
+                voo.setPreco(distancia * 0.1); // Ajuste da fórmula para o preço com base na distância
                 listaVoos.add(voo);
             }
         }
