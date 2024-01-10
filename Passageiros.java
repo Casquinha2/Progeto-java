@@ -8,22 +8,22 @@ public class Passageiros {
     private boolean checkInAutomatico;
     private String metodoPagamento ;
     private String dadosLugar;
-    private int lugarReservado;
+    private int vooReservado;
 
 
-    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico, String metodoPagamento, String dadosLugar) {
+
+    public Passageiros(String nome, String pais, boolean seguro, boolean bagagemExtra, boolean checkInAutomatico, String metodoPagamento, String dadosLugar, int vooReservado) {
         this.nome = nome;
         this.pais = pais;
         this.id = nextid++;
         this.seguro = seguro;
         this.bagagemExtra = bagagemExtra;
         this.checkInAutomatico = checkInAutomatico;
-        this.metodoPagamento = metodoPagamento ;
+        this.vooReservado = vooReservado;
         this.dadosLugar = dadosLugar ;
-        this.lugarReservado = lugarReservado;
+        this.metodoPagamento = metodoPagamento ;
     }
 
-    // Getters and setters for the new attributes
     public boolean isSeguro() {
         return seguro;
     }
@@ -60,6 +60,14 @@ public class Passageiros {
         this.metodoPagamento = metodoPagamento;
     }
 
+    public int getVooReservado() {
+        return vooReservado;
+    }
+
+    public void setVooReservado(int vooReservado) {
+        this.vooReservado = vooReservado;
+    }
+
     public String getDadosLugar() {
         return this.dadosLugar;
     }
@@ -72,20 +80,21 @@ public class Passageiros {
     public String toString() {
         return "Passageiros{" +
                 "nome='" + nome + '\'' +
-                ", id=" + id +
-                ", pais='" + pais + '\'' +
-                ", seguro=" + seguro +
-                ", bagagemExtra=" + bagagemExtra +
-                ", checkInAutomatico=" + checkInAutomatico +
-                ", metodoPagamento=" + metodoPagamento +
-                ", dadosLugar=" + dadosLugar +
+                ", Id=" + id +
+                ", Pais='" + pais + '\'' +
+                ", Seguro=" + seguro +
+                ", Bagagem Extra=" + bagagemExtra +
+                ", CheckIn Automatico=" + checkInAutomatico +
+                ", Voo Reservado=" + vooReservado +
+                ", Dados do Lugar=" + dadosLugar +
+                ", Metodo de Pagamento=" + metodoPagamento +
         '}';
     }
 
-    public double calcularPrecoVoo(Voos voo) {
+    public double calcularPrecoVoo(Voos voo, String classeAssento) {
         double precoFinal = voo.getPreco(); // Preço base do voo
 
-        // Adiciona 20€ se o passageiro escolher segur
+        // Adiciona 20€ se o passageiro escolher seguro
         if (this.seguro) {
             precoFinal += 20;
         }
@@ -93,6 +102,11 @@ public class Passageiros {
         // Adiciona 50€ se o passageiro tiver bagagem extra
         if (this.bagagemExtra) {
             precoFinal += 50;
+        }
+
+        // Se o assento for da classe Business, aumenta o preço em 1.9 vezes
+        if (classeAssento.equalsIgnoreCase("Business")) {
+            precoFinal *= 1.9;
         }
 
         return precoFinal;

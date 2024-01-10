@@ -151,14 +151,13 @@ public class Voos {
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
-                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS)
-                            .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
+                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS).plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 1);
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);
                 double distancia = matrizDistancias[indexPaisSaida][indexPaisChegada];
-                voo.setPreco(distancia * 0.1); // Ajuste da fórmula para o preço com base na distância
+                voo.setPreco(distancia * 0.065); // Ajuste da fórmula para o preço com base na distância
                 listaVoos.add(voo);
             }
         }
@@ -179,14 +178,13 @@ public class Voos {
                         .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 LocalDateTime horarioChegada;
                 do {
-                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS)
-                            .plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
+                    horarioChegada = horarioPartida.plus(random.nextInt(1), ChronoUnit.DAYS).plusHours(random.nextInt(5)).plusMinutes(random.nextInt(60));
                 } while (ChronoUnit.DAYS.between(horarioPartida, horarioChegada) > 1);
 
                 voo.setHorarioDePartida(horarioPartida);
                 voo.setHorarioDeChegada(horarioChegada);
                 double distancia = matrizDistancias[indexPaisSaida][indexPaisChegada];
-                voo.setPreco(distancia * 0.1); // Ajuste da fórmula para o preço com base na distância
+                voo.setPreco(distancia * 0.065); // Ajuste da fórmula para o preço com base na distância
                 listaVoos.add(voo);
             }
         }

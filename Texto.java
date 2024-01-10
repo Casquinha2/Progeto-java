@@ -17,6 +17,7 @@ public class Texto {
     }
 
     public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4 ) throws IOException {
+        System.out.println(voo1);
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -79,12 +80,25 @@ public class Texto {
 
                         System.out.print("\nEscolha o seu Lugar : ");
                         String lugarEscolhido = scanner.next().trim().toUpperCase();
+                        String classeAssento = Assento.verificarClasseAssento(numeroVooEscolhido, voo1, voo2, voo3, voo4, lugarEscolhido);
+
+                        if (!classeAssento.isEmpty()) {
+                            System.out.println("Este lugar é da classe " + classeAssento + ". Tem a certeza que quer reservá-lo? (sim/não)");
+                            String resposta = scanner.next().trim().toLowerCase();
+
+                            if (resposta.equals("sim")) {
+
+                            } else if (resposta.equals("não")) {
+                                System.out.println("Reserva cancelada. Voltando ao início.");
+                                continue; // Isso volta ao início do loop ou ao início da seção de código onde está.
+                            }
+                        }
                         if (lugaresLivres.stream().anyMatch(lugar -> lugar.equalsIgnoreCase(lugarEscolhido))) {
                             lugaresLivres.removeIf(lugar -> lugar.equalsIgnoreCase(lugarEscolhido));
                             List<String> lugaresReservados = dadosAssentos.get(indiceVoo);
+
                             if (!lugaresReservados.contains(lugarEscolhido)) {
                                 lugaresReservados.add(lugarEscolhido);
-                                System.out.println("Lugar " + lugarEscolhido.toUpperCase() + " reservado com sucesso para o voo " + numeroVooEscolhido + ".");
 
                                 // Atualize a lista de dadosAssentos com os lugares reservados e livres atualizados
                                 dadosAssentos.set(indiceVoo, lugaresReservados);
@@ -92,6 +106,49 @@ public class Texto {
 
                                 // Chame um método para salvar essas alterações no arquivo JSON
                                 json.salvarAssentosAtualizados(dadosAssentos);
+
+                                Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
+
+                                vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
+
+
+                                vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() - 1);
+
+                                System.out.println("Escolha o método de pagamento:");
+                                System.out.println("1. Cartão de Crédito");
+                                System.out.println("2. Dinheiro");
+                                System.out.println("3. PayPal");
+                                System.out.print("Opção de método de pagamento: ");
+                                int opcaoPagamento = scanner.nextInt();
+                                scanner.nextLine();
+
+                                String metodoPagamento = "";
+
+                                // Converter a opção numérica para o método de pagamento correspondente
+                                switch (opcaoPagamento) {
+                                    case 1:
+                                        metodoPagamento = "Cartão de Crédito";
+                                        break;
+                                    case 2:
+                                        metodoPagamento = "Dinheiro";
+                                        break;
+                                    case 3:
+                                        metodoPagamento = "PayPal";
+                                        break;
+                                    default:
+                                        System.out.println("Opção inválida. Método de pagamento definido como 'Não especificado'.");
+                                        metodoPagamento = "Não especificado";
+                                        break;
+                                }
+
+                                Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento,lugarEscolhido, numeroVooEscolhido);
+                                // Adicionar o novo passageiro à lista de passageiros do voo
+                                listapessoas.add(novoPassageiro);
+
+                                double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado,classeAssento);
+                                System.out.println("Novo passageiro adicionado com sucesso ao voo número " + numeroVooEscolhido + " com origem em "+ vooSelecionado.getPaisSaida() + " e chegada em " + vooSelecionado.getPaisChegada() + ".");
+                                System.out.println("Preço do voo: " + precoFinal + "€");
+
                             } else {
                                 System.out.println("Este lugar já se encontra reservado");
                             }
@@ -99,51 +156,23 @@ public class Texto {
                             System.out.println("Lugar escolhido não está disponível.");
                         }
 
-                        Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
-
-                        vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
-
-
-                        vooSelecionado.setLugaresLivres(vooSelecionado.getLugaresLivres() - 1);
-
-                        System.out.println("Escolha o método de pagamento:");
-                        System.out.println("1. Cartão de Crédito");
-                        System.out.println("2. Dinheiro");
-                        System.out.println("3. PayPal");
-                        System.out.print("Opção de método de pagamento:(escolha o numero) ");
-                        int opcaoPagamento = scanner.nextInt();
-                        scanner.nextLine();
-
-                        String metodoPagamento = "";
-
-                        // Converter a opção numérica para o método de pagamento correspondente
-                        switch (opcaoPagamento) {
-                            case 1:
-                                metodoPagamento = "Cartão de Crédito";
-                                break;
-                            case 2:
-                                metodoPagamento = "Dinheiro";
-                                break;
-                            case 3:
-                                metodoPagamento = "PayPal";
-                                break;
-                            default:
-                                System.out.println("Opção inválida. Método de pagamento definido como 'Não especificado'.");
-                                metodoPagamento = "Não especificado";
-                                break;
-                        }
-
-                        Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento,lugarEscolhido);
-                        // Adicionar o novo passageiro à lista de passageiros do voo
-                        listapessoas.add(novoPassageiro);
-
-                        // Utilize o voo selecionado, não o primeiro voo da lista original
-                        double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado);
-                        System.out.println("Novo passageiro adicionado com sucesso: " + novoPassageiro);
-                        System.out.println("Preço do voo: " + precoFinal + "€");
                         break;
                     case 3:
-                        System.out.println("Esta funcionalidade atualmente não se encontra \n");
+                        System.out.println("Bem-vindo à seção de Ajuda!");
+                        System.out.println("Para utilizar a WingWays, siga estas etapas:");
+                        System.out.println("1. Verificar Voos: Selecione a opção 1 para visualizar os voos disponíveis.");
+                        System.out.println("2. Reservar: Escolha a opção 2 para registrar-se em um voo.");
+                        System.out.println("3. Ajuda: Esta seção que você está acessando agora.");
+                        System.out.println("4. Sair: Para encerrar o programa, selecione a opção 4.");
+                        System.out.println("\nAo reservar um voo:");
+                        System.out.println("- Preencha as informações solicitadas, como nome, país, bagagem extra, etc.");
+                        System.out.println("- Escolha um voo disponível e selecione um lugar livre para reservar.");
+                        System.out.println("- Selecione o método de pagamento desejado.");
+
+                        System.out.println("\nSe precisar de assistência adicional ou informações específicas,");
+                        System.out.println("entre em contato conosco pelo email support@wingways.com.");
+
+                        System.out.println("\nLembre-se: Aproveite suas aventuras pelo céu com WingWays!");
                         break;
                     case 4:
                         System.out.println("Obrigado por voar conosco! Até a próxima.\n");

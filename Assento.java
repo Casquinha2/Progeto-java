@@ -29,6 +29,14 @@ class Assento { // Renomeando a classe para Assento
         this.reservado = reservado;
     }
 
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
     @Override
     public String toString() {
         // Implemente o método toString para representar os assentos como desejar
@@ -40,7 +48,39 @@ class Assento { // Renomeando a classe para Assento
     }public int getColuna() {
         return coluna;
     }
+    public static String verificarClasseAssento(int numeroVooEscolhido, List<Assento> voo1, List<Assento> voo2, List<Assento> voo3, List<Assento> voo4, String lugarEscolhido) {
+        String classeAssento = "";
+        List<Assento> listaAssentos = null;
 
+        switch (numeroVooEscolhido) {
+            case 1:
+                listaAssentos = voo1;
+                break;
+            case 2:
+                listaAssentos = voo2;
+                break;
+            case 3:
+                listaAssentos = voo3;
+                break;
+            case 4:
+                listaAssentos = voo4;
+                break;
+            default:
+                System.out.println("Número do voo inválido.");
+                break;
+        }
+
+        if (listaAssentos != null) {
+            for (Assento assento : listaAssentos) {
+                if (assento.getNumero().equals(lugarEscolhido)) {
+                    classeAssento = assento.getClasse();
+                    break;
+                }
+            }
+        }
+
+        return classeAssento;
+    }
 
 }
 
