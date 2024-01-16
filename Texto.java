@@ -1,12 +1,11 @@
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Texto {
+    // Método para exibir uma mensagem de boas-vindas
     public void MensagemEntrada(){
         System.out.println("Bem-vindo à WingWays, a sua passagem para aventuras pelo céu!");
         System.out.println("Aqui, você pode reservar seu assento para voos incríveis ao redor do mundo.");
@@ -15,13 +14,14 @@ public class Texto {
 
 
     }
-
+    // Método para exibir o menu principal e gerenciar as interações do usuário
     public void ExibirMenu(List<Passageiros> listapessoas, List<Voos> listavoos, List<Assento>voo1, List<Assento>voo2, List<Assento>voo3, List<Assento>voo4 ) throws IOException {
         System.out.println(voo1);
         Json json = new Json();
         Scanner scanner = new Scanner(System.in);
         int opcao;
         List<List<String>> dadosAssentos = json.carregarAssentosDoArquivo(voo1,voo2,voo3,voo4);
+        // Loop principal para exibir o menu e gerenciar as opções do usuário
         while (true) {
             {
                 System.out.println("\nEscolha uma opção:");
@@ -36,10 +36,12 @@ public class Texto {
 
                 switch (opcao) {
                     case 1:
+                        // Opção para verificar voos disponíveis
                         System.out.println("Aqui pode verificar os voos atualmente em vigor");
                         Voos.exibirVoos(listavoos);
                         break;
                     case 2:
+                        // Opção para registrar-se em um voo
                         System.out.println("Registe-se num voo!");
                         System.out.print("Nome: ");
                         String nome = scanner.nextLine();
@@ -65,14 +67,16 @@ public class Texto {
                         int numeroVooEscolhido = scanner.nextInt();
                         scanner.nextLine();
 
-
+                        // Índice do voo escolhido na lista de dadosAssentos
                         int indiceVoo = (numeroVooEscolhido - 1) * 2;
 
+                        // Verifica se o número do voo é válido
                         if (numeroVooEscolhido < 1 || numeroVooEscolhido > listavoos.size()) {
                             System.out.println("Número do voo inválido.");
                             break;
                         }
 
+                        // Lista de lugares livres no voo escolhido
                         List<String> lugaresLivres = dadosAssentos.get(indiceVoo + 1);
 
                         System.out.println("Voo " + numeroVooEscolhido + ":");
@@ -82,17 +86,20 @@ public class Texto {
                         String lugarEscolhido = scanner.next().trim().toUpperCase();
                         String classeAssento = Assento.verificarClasseAssento(numeroVooEscolhido, voo1, voo2, voo3, voo4, lugarEscolhido);
 
+                        // Verifica se o assento escolhido é válido e se pertence à classe correta
                         if (!classeAssento.isEmpty()) {
                             System.out.println("Este lugar é da classe " + classeAssento + ". Tem a certeza que quer reservá-lo? (sim/não)");
                             String resposta = scanner.next().trim().toLowerCase();
 
                             if (resposta.equals("sim")) {
+                                // Código para prosseguir com a reserva
 
                             } else if (resposta.equals("não")) {
                                 System.out.println("Reserva cancelada. Voltando ao início.");
                                 continue; // Isso volta ao início do loop ou ao início da seção de código onde está.
                             }
                         }
+                        // Verifica se o lugar escolhido está disponível
                         if (lugaresLivres.stream().anyMatch(lugar -> lugar.equalsIgnoreCase(lugarEscolhido))) {
                             lugaresLivres.removeIf(lugar -> lugar.equalsIgnoreCase(lugarEscolhido));
                             List<String> lugaresReservados = dadosAssentos.get(indiceVoo);
@@ -107,6 +114,7 @@ public class Texto {
                                 // Chame um método para salvar essas alterações no arquivo JSON
                                 json.salvarAssentosAtualizados(dadosAssentos);
 
+                                // Atualiza informações do voo e do passageiro
                                 Voos vooSelecionado = listavoos.get(numeroVooEscolhido - 1);
 
                                 vooSelecionado.setLugaresReservados(vooSelecionado.getLugaresReservados() + 1);
@@ -141,10 +149,12 @@ public class Texto {
                                         break;
                                 }
 
+                                // Cria um novo passageiro e adiciona à lista de passageiros do voo
                                 Passageiros novoPassageiro = new Passageiros(nome, pais, seguro, bagagemExtra, checkInAutomatico, metodoPagamento,lugarEscolhido, numeroVooEscolhido);
                                 // Adicionar o novo passageiro à lista de passageiros do voo
                                 listapessoas.add(novoPassageiro);
 
+                                // Calcula e exibe o preço final do voo
                                 double precoFinal = novoPassageiro.calcularPrecoVoo(vooSelecionado,classeAssento);
                                 System.out.println("Novo passageiro adicionado com sucesso ao voo número " + numeroVooEscolhido + " com origem em "+ vooSelecionado.getPaisSaida() + " e chegada em " + vooSelecionado.getPaisChegada() + ".");
                                 System.out.println("Preço do voo: " + precoFinal + "€");
@@ -158,8 +168,10 @@ public class Texto {
 
                         break;
                     case 3:
+                        // Opção para exibir a seção de ajuda
                         System.out.println("Bem-vindo à seção de Ajuda!");
                         System.out.println("Para utilizar a WingWays, siga estas etapas:");
+                        // Instruções para utilizar o programa
                         System.out.println("1. Verificar Voos: Selecione a opção 1 para visualizar os voos disponíveis.");
                         System.out.println("2. Reservar: Escolha a opção 2 para registrar-se em um voo.");
                         System.out.println("3. Ajuda: Esta seção que você está acessando agora.");
@@ -181,6 +193,7 @@ public class Texto {
                         System.exit(0);
                         break;
                     default:
+                        // Opção inválida, solicita uma opção válida
                         System.out.println("Opção inválida. Escolha uma opção válida.\n");
                         break;
                 }

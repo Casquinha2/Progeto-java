@@ -4,18 +4,16 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.lang.reflect.Type;
 
-
+// A classe Json é responsável por salvar e carregar dados em formato JSON.
 public class Json {
 
-
+    // Método para salvar dados de passageiros em um arquivo JSON.
     public void salvar_passageiros(List<Passageiros> passageiros) throws IOException {
         try {
             Gson gson = new Gson();
@@ -28,8 +26,7 @@ public class Json {
         }
     }
 
-    ;
-
+    // Método para ler dados de passageiros de um arquivo JSON.
     public List<Passageiros> ler_passageiros() throws FileNotFoundException {
         try {
             Gson gson = new Gson();
@@ -51,6 +48,7 @@ public class Json {
         }
     }
 
+    // Método para salvar dados de voos em um arquivo JSON.
     public void salvar_voos(List<Voos> voos) throws IOException {
         try {
             Gson gson = new GsonBuilder()
@@ -66,6 +64,7 @@ public class Json {
         }
     }
 
+    // Método para ler dados de voos de um arquivo JSON.
     public Object ler_voos() throws FileNotFoundException {
         try {
             List<Voos> listavoos = new ArrayList<>();
@@ -90,6 +89,7 @@ public class Json {
         }
     }
 
+    // Método para salvar assentos de um voo em um arquivo JSON.
     public void salvarAssentosDoVoo(List<Assento> assentos, String nomeArquivo) {
         try {
             Gson gson = new Gson();
@@ -102,6 +102,7 @@ public class Json {
         }
     }
 
+    // Classe interna para adaptar o formato LocalDateTime para JSON.
     public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
 
         @Override
@@ -115,6 +116,7 @@ public class Json {
         }
     }
 
+    // Método para carregar dados de assentos de um arquivo JSON.
     public List<List<String>> carregarAssentosDoArquivo(List<Assento> voo1, List<Assento> voo2, List<Assento> voo3, List<Assento> voo4) {
         Gson gson = new Gson();
         List<List<String>> dadosAssentos = new ArrayList<>();
@@ -136,6 +138,8 @@ public class Json {
 
         return dadosAssentos;
     }
+
+    // Método para salvar dados de assentos em um arquivo JSON
     public void salvarAssentosAtualizados(List<List<String>> dadosAssentos) {
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter("Assentos.json")) {
@@ -144,6 +148,8 @@ public class Json {
             e.printStackTrace();
         }
     }
+
+    // Método para salvar dados de assentos em um arquivo JSON.
     public static List<List<String>> salvarAssentosJSON(List<Assento> voo1, List<Assento> voo2, List<Assento> voo3, List<Assento> voo4) {
         List<List<String>> listaAssentos = TransformarListaAssentos(voo1, voo2, voo3, voo4);
         Gson gson = new Gson();
@@ -157,6 +163,7 @@ public class Json {
         return listaAssentos;
     }
 
+    // Método para transformar lista de assentos em formato apropriado para JSON.
     public static List<List<String>> TransformarListaAssentos(List<Assento> voo1, List<Assento> voo2, List<Assento> voo3, List<Assento> voo4) {
         List<List<String>> assentosPorVoo = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {

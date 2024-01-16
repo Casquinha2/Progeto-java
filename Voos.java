@@ -2,21 +2,22 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.time.temporal.ChronoUnit;
 
+// A classe Voos representa informações sobre voos disponíveis.
 public class Voos {
 
-    private String paisSaida;
-    private String paisChegada;
-    private LocalDateTime HorarioDePartida;
-    private LocalDateTime HorarioDeChegada;
-    private double preco;
-    private int lugaresReservados;
-    private int lugaresLivres;
+    private String paisSaida; // O país de onde o voo parte.
+    private String paisChegada; // O país de chegada do voo.
+    private LocalDateTime HorarioDePartida; // O horário de partida do voo.
+    private LocalDateTime HorarioDeChegada; // O horário de chegada do voo.
+    private double preco; // O preço do voo.
+    private int lugaresReservados; // O número de lugares reservados no voo.
+    private int lugaresLivres; // O número de lugares livres no voo.
 
+    // Construtor da classe Voos que cria um voo com informações aleatórias.
     public Voos() {
         Random random = new Random();
         this.paisSaida = obterPaisAleatorio(random);
@@ -28,6 +29,7 @@ public class Voos {
         this.lugaresLivres = 0;
     }
 
+    // Método toString() que retorna uma representação em string do objeto Voos.
     @Override
     public String toString() {
         return "Voos{" +
@@ -40,15 +42,16 @@ public class Voos {
                 ", lugaresLivres=" + lugaresLivres +
                 '}';
     }
-
+    // Lista de países possíveis para os voos.
     private static final List<String> paises = List.of(
             "Portugal", "Brasil", "EUA", "Canadá", "Reino Unido", "Alemanha", "França", "Japão", "Austrália", "China", "Índia"
     );
-
+    // Método privado para obter um país aleatório da lista de países.
     private String obterPaisAleatorio(Random random) {
         return paises.get(random.nextInt(paises.size()));
     }
 
+    // Métodos getters e setters para as propriedades da classe Voos.
     public String getPaisSaida() {
         return this.paisSaida;
     }
@@ -105,7 +108,7 @@ public class Voos {
         this.lugaresLivres = lugaresLivres;
     }
 
-
+    // Método que exibe informações detalhadas sobre um voo.
     public void informacoesDoVoo() {
         System.out.println("País de Saída: " + this.paisSaida);
         System.out.println("País de Chegada: " + this.paisChegada);
@@ -116,7 +119,7 @@ public class Voos {
         System.out.println("Lugares Reservados: " + this.lugaresReservados);
         System.out.println("Lugares Livres: " + this.lugaresLivres);
     }
-
+    // Matriz de distâncias entre países para cálculo de preço de voo.
     private static final double[][] matrizDistancias = {
             // Portugal, Brasil, EUA, Canadá, Reino Unido, Alemanha, França, Japão, Austrália, China, Índia
             {0, 7000, 8000, 7500, 2000, 2500, 2200, 11000, 16000, 12000, 9500}, // Portugal
@@ -132,7 +135,7 @@ public class Voos {
             {9500, 14000, 12000, 11000, 8000, 9000, 9500, 5000, 5500, 2500, 0}     // Índia
     };
 
-
+    // Método para criar uma lista de voos com informações aleatórias.
     public static List<Voos> criarListaDeVoosAleatorios() {
         List<Voos> listaVoos = new ArrayList<>();
         Random random = new Random();
@@ -191,7 +194,7 @@ public class Voos {
 
         return listaVoos;
     }
-
+    // Método para realizar reservas de assentos em voos.
     public static List<String> Reserva(List<Assento> assentos) {
         Random random = new Random();
         List<String> listareservados = new ArrayList<>();
@@ -211,9 +214,7 @@ public class Voos {
         return listareservados;
     }
 
-
-
-
+    // Método para exibir informações de todos os voos em uma lista.
     public static void exibirVoos(List<Voos> listaVoos) {
         int i = 1;
         for (Voos voo : listaVoos) {

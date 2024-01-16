@@ -1,13 +1,15 @@
 import java.util.List;
 
-class Assento { // Renomeando a classe para Assento
-    private String numero;
-    private int fila;
-    private char coluna;
-    private String local;
-    private String classe;
-    private boolean reservado; // Adicionado atributo reservado
+// A classe Assento representa informações sobre os assentos disponíveis em voos.
+class Assento {
+    private String numero; // Número do assento.
+    private int fila; // Número da fila do assento.
+    private char coluna; // Letra da coluna do assento.
+    private String local; // Localização do assento (por exemplo, janela, corredor).
+    private String classe; // Classe do assento (por exemplo, econômica, executiva).
+    private boolean reservado; // Indica se o assento está reservado ou não.
 
+    // Construtor da classe Assento para inicializar os atributos.
     public Assento(String numero, int fila, char coluna, String local, String classe) {
         this.numero= numero;
         this.fila = fila; // Você pode definir a fila como o número
@@ -17,6 +19,7 @@ class Assento { // Renomeando a classe para Assento
         this.reservado = false;
     }
 
+    // Métodos getters e setters para os atributos da classe Assento.
     public String getNumero() {
         return numero;
     }
@@ -37,21 +40,27 @@ class Assento { // Renomeando a classe para Assento
         this.classe = classe;
     }
 
+    // Método toString para representar um objeto Assento como uma string formatada.
     @Override
     public String toString() {
         // Implemente o método toString para representar os assentos como desejar
         // Retorne uma string com informações relevantes do assento
         return "Assento: " + numero + ", Fila: " + fila + ", Coluna: " + coluna + ", Local: " + local + ", Classe: " + classe;
     }
+
+    // Métodos adicionais para obter a fila e a coluna do assento.
     public int getFila() {
         return fila;
     }public int getColuna() {
         return coluna;
     }
+
+    // Método estático para verificar a classe de um assento com base no número do voo e no lugar escolhido.
     public static String verificarClasseAssento(int numeroVooEscolhido, List<Assento> voo1, List<Assento> voo2, List<Assento> voo3, List<Assento> voo4, String lugarEscolhido) {
         String classeAssento = "";
         List<Assento> listaAssentos = null;
 
+        // Seleciona a lista de assentos com base no número do voo escolhido.
         switch (numeroVooEscolhido) {
             case 1:
                 listaAssentos = voo1;
@@ -70,6 +79,7 @@ class Assento { // Renomeando a classe para Assento
                 break;
         }
 
+        // Verifica a classe do assento com base no lugar escolhido.
         if (listaAssentos != null) {
             for (Assento assento : listaAssentos) {
                 if (assento.getNumero().equals(lugarEscolhido)) {
